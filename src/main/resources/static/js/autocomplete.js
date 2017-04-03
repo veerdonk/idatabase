@@ -9,4 +9,15 @@ window.onload = function() {
             geneToUse = suggestion;
         }
     });
-}
+
+    $('#submitSNP').click(function () {
+        var snp = $('#snpName').val();
+        $.ajax({
+            url: "http://myvariant.info/v1/query?q="+ snp +"\&fields=dbsnp"
+        }).then(function (response) {
+            var geneName = response.hits[0].dbsnp.gene.symbol;
+            $('#geneId').val(geneName);
+            $('#geneForm').submit();
+        })
+    })
+};

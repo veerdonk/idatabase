@@ -30,4 +30,10 @@ public class GeneController {
         model.addAttribute("genes", genes);
         return "/geneResults";
     }
+
+    @RequestMapping(value = "/{locale}/snp")
+    public String snpResults(Model model, @RequestParam("snpName") String snp){
+        model.addAttribute("geneId", snp);
+        return "redirect: /{locale}/gene";
+    }
 }
