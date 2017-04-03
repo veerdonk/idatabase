@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.13/fh-3.1.2/sc-1.4.2/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.13/fh-3.1.2/sc-1.4.2/datatables.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/tables.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-2.1.1.js}"></script>
+    <title>Title</title>
+</head>
+<body>
+    <!--/*@thymesVar id="geneName" type="java"*/-->
+    <table th:id="geneTable" th:width="100" th:border="1">
+        <thead>
+            <tr>
+                <th>Stress</th>
+                <th>timepoint</th>
+                <th>ensembl id</th>
+                <th>log 2 fold</th>
+                <th>p-value</th>
+                <th>gene name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <th:block th:each="gene : ${genes}">
+                <tr>
+                    <td th:text="${gene.stressFactor}">stressfactor</td>
+                    <td th:text="${gene.timepoint}">timepoint</td>
+                    <td th:text="${gene.ensId}">ensembl id</td>
+                    <td th:text="${gene.log2fold}">log 2 fold</td>
+                    <td th:text="${gene.pval}">pvalue</td>
+                    <td th:text="${gene.geneName}">name</td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+</body>
+</html>

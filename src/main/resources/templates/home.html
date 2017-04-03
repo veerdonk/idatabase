@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{home.tabtitle}">tabTitle</title>
+    <script type="text/javascript" th:src="@{/js/jquery-2.1.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.autocomplete.js}"></script>
+    <script type="text/javascript" th:src="@{/js/autocomplete.js}"></script>
+    <script type="text/javascript" th:src="@{/js/variantRest.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/iDatabase.css}"/>
+
+</head>
+<body>
+    <p th:text="#{home.welcome}">welcome</p>
+    <p th:text="#{home.searchGenes}">Search gene:</p>
+    <form th:action="@{'/' + ${#locale.language} + '/gene'}">
+        <input id="geneId" name="geneId" type="text"/>
+        <button>submit</button>
+    </form><br/>
+
+    <p th:text="#{home.searchSNP}">Search SNP:</p>
+    <form th:id="snpForm">
+        <input id="resttest" name="test" type="text"/>
+    </form>
+    <button id="test">test rest</button>
+    <div id="responseTest">test</div>
+
+</body>
+</html>
