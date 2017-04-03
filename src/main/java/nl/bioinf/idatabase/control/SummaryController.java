@@ -35,10 +35,22 @@ public class SummaryController {
     public String pathogenData(Model model){
 
         List<StressFactor> numGenes = geneService.numberOfGenesPerVector();
+        StringBuilder sb = new StringBuilder();
+        sb.append("[\n");
+        for(StressFactor sf : numGenes){
+            sb.append("{label: '");
+            sb.append(sf.getOrganism() + sf.getTimepoint());
+            sb.append("', y: ");
+            sb.append(sf.getNumberOfGenes());
+            sb.append("},\n");
+        }
+        sb.setLength(sb.length()-2);
+        sb.append("\n]");
+
         Gson gson = new Gson();
         String numbers = gson.toJson(numGenes);
-        System.out.println(numbers);
+        System.out.println(sb.toString());
 
-        return numbers;
+        return sb.toString();
     }
 }
