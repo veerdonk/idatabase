@@ -15,7 +15,8 @@
 
     <form th:id="geneForm" th:action="@{'/' + ${#locale.language} + '/gene'}">
         <input th:id="geneId" name="geneId" type="text"/>
-        <button>submit</button>
+        <br/>
+        <button>Search gene</button>
     </form>
     <br/>
 
@@ -24,8 +25,8 @@
     <form th:id="snpForm" th:action="@{'/' + ${#locale.language} + '/snp'}">
         <input th:id="snpName" th:type="text"/>
     </form>
-    <button id="submitSNP">test rest</button>
-    <div id="responseTest">test</div>
+    <button id="submitSNP">Search SNP</button>
+
 
 </body>
 </html>

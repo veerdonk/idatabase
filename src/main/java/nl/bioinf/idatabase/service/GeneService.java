@@ -2,6 +2,7 @@ package nl.bioinf.idatabase.service;
 
 import nl.bioinf.idatabase.dataAccess.GeneDataSource;
 import nl.bioinf.idatabase.model.Gene;
+import nl.bioinf.idatabase.model.StressFactor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class GeneService {
         return geneDataSource.getNames(query);
     }
 
-    public HashMap numberOfGenesPerVector(){
+    public List<StressFactor> numberOfGenesPerVector(){
         return geneDataSource.numberOfGenesPerVector();
     }
 }

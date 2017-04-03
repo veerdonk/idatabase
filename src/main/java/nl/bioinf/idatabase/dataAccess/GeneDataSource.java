@@ -1,6 +1,7 @@
 package nl.bioinf.idatabase.dataAccess;
 
 import nl.bioinf.idatabase.model.Gene;
+import nl.bioinf.idatabase.model.StressFactor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,6 @@ public interface GeneDataSource {
     List<Gene> getGeneByensId(String ensId);
     List<Gene> getGeneByGeneName(String geneName);
     List<String> getNames(String query);
-    HashMap numberOfGenesPerVector();
+    List<StressFactor> numberOfGenesPerVector();
 
 }

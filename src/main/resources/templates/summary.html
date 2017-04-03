@@ -4,11 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" th:href="@{/css/iDatabase.css}"/>
     <script type="text/javascript" th:src="@{/js/jquery-2.1.1.js}"></script>
-    <script type="text/javascript" th:src="@{/js/jquery.flot.js}"></script>
-    <script type="text/javascript" th:src="@{/js/plottest.js}"></script>
+    <script type="text/javascript" th:src="@{/js/graphs.js}"></script>
+    <script type="text/javascript" th:src="@{/js/canvasjs.js}"></script>
     <title th:text="#{summary.tabtitle}">tabTitle</title>
 </head>
 <body>
-    <div th:id="stressPlot"></div>
+    <div th:id="data">data</div>
+    <div th:id="test">test</div>
+    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
 </body>
 </html>

@@ -4,10 +4,16 @@ package nl.bioinf.idatabase.model;
  * Created by dvandeveerdonk on 30-3-17.
  * Defines the properties of a stressfactor
  */
-public class stressFactor {
+public class StressFactor {
     private String organism;
     private String timepoint;
     private int numberOfGenes;
+
+    public StressFactor(String organism, String timepoint, int numberOfGenes) {
+        this.organism = organism;
+        this.timepoint = timepoint;
+        this.numberOfGenes = numberOfGenes;
+    }
 
     public String getOrganism() {
         return organism;

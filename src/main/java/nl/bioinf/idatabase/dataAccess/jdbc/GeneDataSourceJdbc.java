@@ -3,6 +3,7 @@ package nl.bioinf.idatabase.dataAccess.jdbc;
 
 import nl.bioinf.idatabase.dataAccess.GeneDataSource;
 import nl.bioinf.idatabase.model.Gene;
+import nl.bioinf.idatabase.model.StressFactor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -100,16 +102,18 @@ public class GeneDataSourceJdbc implements GeneDataSource{
      * @return
      */
     @Override
-    public HashMap numberOfGenesPerVector() {
+    public List<StressFactor> numberOfGenesPerVector() {
+        List<StressFactor> stressFactors = new LinkedList<>();
 
-        HashMap numberOfgenes = new HashMap();
+//        HashMap numberOfgenes = new HashMap();
         List<String> timepoints = jdbcTemplate.queryForList("SELECT DISTINCT timepoint FROM DE_genes;", String.class);
         for (String factor : jdbcTemplate.queryForList("SELECT DISTINCT stress_factor FROM DE_genes;", String.class)) {
             for (String tp : timepoints) {
-                numberOfgenes.put(factor + tp, jdbcTemplate.queryForObject("SELECT COUNT(DISTINCT gene_name) FROM DE_genes WHERE stress_factor =? AND timepoint =?", int.class, factor, tp));
+//                numberOfgenes.put(factor + tp, jdbcTemplate.queryForObject("SELECT COUNT(DISTINCT gene_name) FROM DE_genes WHERE stress_factor =? AND timepoint =?", int.class, factor, tp));
+                stressFactors.add(new StressFactor(factor, tp, jdbcTemplate.queryForObject("SELECT COUNT(DISTINCT gene_name) FROM DE_genes WHERE stress_factor =? AND timepoint =?", int.class, factor, tp)));
             }
         }
-    return numberOfgenes;
+    return stressFactors;
     }
 
 

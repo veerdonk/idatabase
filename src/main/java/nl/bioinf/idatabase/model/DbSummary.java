@@ -10,7 +10,7 @@ import java.util.List;
 public class DbSummary {
     private int TotalGenes;
     private int uniqueGenes;
-    private List<stressFactor> stressFactors;
+    private List<StressFactor> stressFactors;
     private List<Gene> top10Genes;
     private List<Gene> low10Genes;
 }
