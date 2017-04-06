@@ -3,6 +3,7 @@ package nl.bioinf.idatabase.control;
 import com.google.gson.Gson;
 import nl.bioinf.idatabase.model.Gene;
 import nl.bioinf.idatabase.service.GeneService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +19,18 @@ import java.util.List;
 
 @Controller
 public class GeneController {
-    private final GeneService geneService;
 
-    public GeneController(GeneService geneService) {
-        this.geneService = geneService;
-    }
+    @Autowired
+    GeneService geneService;
 
     @RequestMapping(value="/{locale}/gene")
     public String geneResults(Model model, @RequestParam("geneId") String id){
         List<Gene> genes = geneService.getGene(id);
+
+        if(genes.isEmpty()){
+            model.addAttribute("noSuchGene", "This Gene is not present in the database, please try again");
+            return "/home";
+        }
         model.addAttribute("genes", genes);
         return "/geneResults";
     }

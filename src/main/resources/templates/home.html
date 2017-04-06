@@ -12,7 +12,7 @@
 <body>
     <p th:text="#{home.welcome}">welcome</p>
     <p th:text="#{home.searchGenes}">Search gene:</p>
-
+    <div th:class="error" th:if="${noSuchGene}" th:text="${noSuchGene}">errortest</div>
     <form th:id="geneForm" th:action="@{'/' + ${#locale.language} + '/gene'}">
         <input th:id="geneId" name="geneId" type="text"/>
         <br/>
