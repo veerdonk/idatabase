@@ -16,12 +16,6 @@ import java.util.Locale;
 
 @Controller
 public class HomeController {
-    private final GeneService geneService;
-
-    public HomeController(GeneService geneService) {
-        this.geneService = geneService;
-    }
-
     @RequestMapping(
             value = {"", "/", "home", "/home", "/home.html"})
             public String home(Locale locale){

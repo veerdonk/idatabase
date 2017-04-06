@@ -4,16 +4,12 @@ package nl.bioinf.idatabase.dataAccess.jdbc;
 import nl.bioinf.idatabase.dataAccess.GeneDataSource;
 import nl.bioinf.idatabase.model.Gene;
 import nl.bioinf.idatabase.model.StressFactor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,11 +22,9 @@ import java.util.List;
 public class GeneDataSourceJdbc implements GeneDataSource{
 
     private final JdbcTemplate jdbcTemplate;
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public GeneDataSourceJdbc(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate){
+    public GeneDataSourceJdbc(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
     /**

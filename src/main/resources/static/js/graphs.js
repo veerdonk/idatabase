@@ -22,20 +22,7 @@ window.onload = function () {
             data: [
                 {
                     type: "column",
-                    dataPoints: [
-                        {label: 'Aspergillus_fumigatus4h', y: 876},
-                        {label: 'Aspergillus_fumigatus24h', y: 594},
-                        {label: 'Candida_albicans4h', y: 850},
-                        {label: 'Candida_albicans24h', y: 2511},
-                        {label: 'IL-1alpha4h', y: 175},
-                        {label: 'IL-1alpha24h', y: 746},
-                        {label: 'Mycobacterium_tuberculosis4h', y: 1456},
-                        {label: 'Mycobacterium_tuberculosis24h', y: 1921},
-                        {label: 'Pseudomonas_aeruginosa4h', y: 2921},
-                        {label: 'Pseudomonas_aeruginosa24h', y: 2970},
-                        {label: 'Streptococcus_pneumoniae4h', y: 1295},
-                        {label: 'Streptococcus_pneumoniae24h', y: 2184}
-                    ]
+                    dataPoints: response
                 }
             ]
         });
