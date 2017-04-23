@@ -6,7 +6,6 @@ import nl.bioinf.idatabase.model.StressFactor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -38,4 +37,5 @@ public class GeneService {
     public List<StressFactor> numberOfGenesPerVector(){
         return geneDataSource.numberOfGenesPerVector();
     }
+
 }

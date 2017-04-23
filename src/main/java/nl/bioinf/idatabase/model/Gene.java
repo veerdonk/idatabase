@@ -24,6 +24,51 @@ public class Gene {
         this.geneName = geneName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Gene gene = (Gene) o;
+
+        if (id != gene.id) return false;
+        if (Double.compare(gene.log2fold, log2fold) != 0) return false;
+        if (Double.compare(gene.pval, pval) != 0) return false;
+        if (!stressFactor.equals(gene.stressFactor)) return false;
+        if (!timepoint.equals(gene.timepoint)) return false;
+        if (!ensId.equals(gene.ensId)) return false;
+        return geneName.equals(gene.geneName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id;
+        result = 31 * result + stressFactor.hashCode();
+        result = 31 * result + timepoint.hashCode();
+        result = 31 * result + ensId.hashCode();
+        temp = Double.doubleToLongBits(log2fold);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(pval);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + geneName.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Gene{" +
+                "id=" + id +
+                ", stressFactor='" + stressFactor + '\'' +
+                ", timepoint='" + timepoint + '\'' +
+                ", ensId='" + ensId + '\'' +
+                ", log2fold=" + log2fold +
+                ", pval=" + pval +
+                ", geneName='" + geneName + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
