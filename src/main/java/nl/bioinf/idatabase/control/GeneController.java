@@ -1,11 +1,11 @@
 package nl.bioinf.idatabase.control;
 
-import com.google.gson.Gson;
 import nl.bioinf.idatabase.model.Gene;
 import nl.bioinf.idatabase.service.GeneService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
