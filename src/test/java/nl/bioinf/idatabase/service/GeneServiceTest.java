@@ -69,4 +69,26 @@ GeneService geneService;
 
         assertEquals(expectedGenes, genes);
     }
+
+    /**
+     * Sunny day scenario for the function that retrieves
+     * information from the database to be used for autocomplete
+     * A list of gene names is expected
+     */
+    @Test
+    public void getNamesTest(){
+        List<String> expectedGenes = new ArrayList<>(Arrays.asList("SKAP2"));
+        List<String> genes = geneService.getNames("KAP2");
+
+        assertEquals(expectedGenes, genes);
+    }
+
+    /**
+     * Test for the getNames method where a null input is tested
+     * expected is a nullpointerexception
+     */
+    @Test(expected = NullPointerException.class)
+    public void nullInputGetNamesTest(){
+        geneService.getNames(null);
+    }
 }

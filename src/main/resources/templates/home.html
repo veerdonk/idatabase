@@ -7,25 +7,37 @@
     <script type="text/javascript" th:src="@{/js/jquery.autocomplete.js}"></script>
     <script type="text/javascript" th:src="@{/js/autocomplete.js}"></script>
     <link rel="stylesheet" th:href="@{/css/iDatabase.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 
 </head>
 <body>
-    <p th:text="#{home.welcome}">welcome</p>
-    <p th:text="#{home.searchGenes}">Search gene:</p>
-    <div th:class="error" th:if="${noSuchGene}" th:text="${noSuchGene}">errortest</div>
-    <form th:id="geneForm" th:action="@{'/' + ${#locale.language} + '/gene'}">
-        <input th:id="geneId" name="geneId" type="text"/>
+    <img th:id="logo" th:class="pull-right" th:src="@{/img/umcgkikker2.jpg}"/>
+    <div th:class="text-center">
+        <h1 th:text="#{home.apptitle}">Apptitle</h1>
+        <p th:text="#{home.subtitle}">app subtitle</p>
+    </div>
+
+<div th:class="container">
+    <div th:class="jumbotron">
+        <p th:text="#{home.welcome}">welcome</p>
+        <p th:text="#{home.searchGenes}">Search gene:</p>
+        <div th:class="error" th:if="${noSuchGene}" th:text="${noSuchGene}">errortest</div>
+        <form th:id="geneForm" th:action="@{'/' + ${#locale.language} + '/gene'}">
+            <input th:id="geneId" name="geneId" type="text"/>
+            <br/>
+            <button>Search gene</button>
+        </form>
         <br/>
-        <button>Search gene</button>
-    </form>
-    <br/>
 
-    <p th:text="#{home.searchSNP}">Search SNP:</p>
+        <p th:text="#{home.searchSNP}">Search SNP:</p>
 
-    <form th:id="snpForm" th:action="@{'/' + ${#locale.language} + '/snp'}">
-        <input th:id="snpName" th:type="text"/>
-    </form>
-    <button id="submitSNP">Search SNP</button>
+        <form th:id="snpForm" th:action="@{'/' + ${#locale.language} + '/snp'}">
+            <input th:id="snpName" th:type="text"/>
+        </form>
+        <button id="submitSNP">Search SNP</button>
+    </div>
+</div>
+
 
 
 </body>
