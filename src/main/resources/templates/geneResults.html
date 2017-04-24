@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.13/fh-3.1.2/sc-1.4.2/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.7/dt-1.10.13/fh-3.1.2/sc-1.4.2/datatables.min.js"></script>
-    <script type="text/javascript" th:src="@{/js/tables.js}"></script>
-    <script type="text/javascript" th:src="@{/js/jquery-2.1.1.js}"></script>
-    <title>Title</title>
+<head th:replace="header :: header">
 </head>
 <body>
-    <!--/*@thymesVar id="geneName" type="java"*/-->
-
-    <table th:id="geneTable" th:width="100" th:border="1">
+<div th:replace="title :: title">title</div>
+<p th:text="#{results.explanation}">tableBelow</p>
+<div th:class="container">
+    <table th:id="geneTable">
         <thead>
             <tr>
                 <th>Stress</th>
@@ -35,5 +30,7 @@
             </th:block>
         </tbody>
     </table>
+    <a th:text="#{results.tryAgain}" th:href="home.html">returnHome</a>
+</div>
 </body>
 </html>
