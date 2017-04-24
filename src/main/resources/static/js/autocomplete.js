@@ -5,6 +5,8 @@
 window.onload = function() {
     $('#geneId').autocomplete({
         serviceUrl: '/search/forGene',
+        lookupLimit: 50,
+        minChars: 2,
         onSelect: function (suggestion) {
             geneToUse = suggestion;
         }
