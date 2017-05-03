@@ -19,4 +19,8 @@ window.onload = function () {
         });
         chart.render();
     });
+
+    $.ajax({
+        url: "/"
+    })
 };

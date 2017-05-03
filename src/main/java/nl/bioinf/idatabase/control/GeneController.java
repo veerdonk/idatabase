@@ -20,9 +20,21 @@ import java.util.List;
 @Controller
 public class GeneController {
 
+    /**
+     * GeneService is used as intermediate for
+     * connecting to a datasource
+     */
     @Autowired
     GeneService geneService;
 
+    /**
+     * Retrieves genes from a datasource using geneservice
+     * checks whether there is a result and ties it to the
+     * model.
+     * @param model
+     * @param id
+     * @return reference to geneResults.html
+     */
     @RequestMapping(value="/{locale}/gene")
     public String geneResults(Model model, @RequestParam("geneId") String id){
         List<Gene> genes = geneService.getGene(id);
@@ -33,11 +45,5 @@ public class GeneController {
         }
         model.addAttribute("genes", genes);
         return "/geneResults";
-    }
-
-    @RequestMapping(value = "/{locale}/snp")
-    public String snpResults(Model model, @RequestParam("snpName") String snp){
-        model.addAttribute("geneId", snp);
-        return "redirect: /{locale}/gene";
     }
 }

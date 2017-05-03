@@ -22,6 +22,14 @@ public class AutocompleteController {
         this.geneService = geneService;
     }
 
+    /**
+     * uses geneService to retrieve a list of
+     * gene objects from a datasource. then
+     * formats these to work with devbridge
+     * autocomplete.
+     * @param query
+     * @return devbridge compatible json
+     */
     @ResponseBody
     @RequestMapping("/search/forGene")
     public String getGeneByNameOrId(String query){

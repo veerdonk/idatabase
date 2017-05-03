@@ -4,6 +4,7 @@ package nl.bioinf.idatabase.control;
 import nl.bioinf.idatabase.model.ChartTemplate;
 import nl.bioinf.idatabase.model.StressFactor;
 import nl.bioinf.idatabase.service.GeneService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,21 +20,30 @@ import java.util.List;
  */
 @Controller
 public class SummaryController {
-    private final GeneService geneService;
+    /**
+     * GeneService is used as intermediate for
+     * connecting to a datasource
+     */
+    @Autowired
+    GeneService geneService;
 
-    public SummaryController(GeneService geneService) {
-        this.geneService = geneService;
-    }
-
+    /**
+     * listens for summary page request
+     * @return reference to the summary.html template
+     */
     @RequestMapping(value = "/{locale}/summary")
-    public String summary(Model model){
-
-
+    public String summary(){
         return "/summary";
     }
+
+    /**
+     * REST controller to retrive pathogen data from a datasource
+     * and generate a json response using ChartTemplate and StressFactor
+     * @return json object containing a list of stressfactors
+     */
     @ResponseBody
     @RequestMapping(value = "/getPathogenData", produces = "application/json")
-    public List<ChartTemplate> pathogenData(Model model){
+    public List<ChartTemplate> pathogenData(){
 
         List<StressFactor> numGenes = geneService.numberOfGenesPerVector();
         List<ChartTemplate> chartData = new ArrayList<>();
@@ -42,10 +52,7 @@ public class SummaryController {
             chartTemplate.setLabel(sf.getOrganism()+sf.getTimepoint().toString());
             chartTemplate.setY(sf.getNumberOfGenes());
             chartData.add(chartTemplate);
-
         }
-
-
         return chartData;
     }
 }

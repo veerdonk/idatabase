@@ -31,7 +31,7 @@ public class GeneDataSourceJdbc implements GeneDataSource{
      * Searches the database for genes with the given
      * ensembl ID, returns an instance of the Gene class
      * @param ensId
-     * @return
+     * @return a list of Gene objects
      */
     @Override
     public List<Gene> getGeneByensId(String ensId) {
@@ -42,7 +42,7 @@ public class GeneDataSourceJdbc implements GeneDataSource{
      * Searches the database for Genes with given gene name
      * returns an instance of the Gene class
      * @param geneName
-     * @return
+     * @return a list of Gene objects
      */
     @Override
     public List<Gene> getGeneByGeneName(String geneName) {
@@ -81,7 +81,7 @@ public class GeneDataSourceJdbc implements GeneDataSource{
      * matches (part) of a string provided by the ajax autocomplete
      * controller
      * @param query
-     * @return
+     * @return a list of gene names and/or ensembl ids
      */
     @Override
     public List<String> getNames(String query) {
@@ -93,17 +93,15 @@ public class GeneDataSourceJdbc implements GeneDataSource{
 
     /**
      * Counts all distinct genes per stress factor and returns these numbers
-     * @return
+     * @return a list of stressfactor objects
      */
     @Override
     public List<StressFactor> numberOfGenesPerVector() {
         List<StressFactor> stressFactors = new LinkedList<>();
 
-//        HashMap numberOfgenes = new HashMap();
         List<String> timepoints = jdbcTemplate.queryForList("SELECT DISTINCT timepoint FROM DE_genes;", String.class);
         for (String factor : jdbcTemplate.queryForList("SELECT DISTINCT stress_factor FROM DE_genes;", String.class)) {
             for (String tp : timepoints) {
-//                numberOfgenes.put(factor + tp, jdbcTemplate.queryForObject("SELECT COUNT(DISTINCT gene_name) FROM DE_genes WHERE stress_factor =? AND timepoint =?", int.class, factor, tp));
                 stressFactors.add(new StressFactor(factor, tp, jdbcTemplate.queryForObject("SELECT COUNT(DISTINCT gene_name) FROM DE_genes WHERE stress_factor =? AND timepoint =?", int.class, factor, tp)));
             }
         }
