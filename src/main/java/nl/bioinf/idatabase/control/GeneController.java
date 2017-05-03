@@ -28,7 +28,7 @@ public class GeneController {
         List<Gene> genes = geneService.getGene(id);
 
         if(genes.isEmpty()){
-            model.addAttribute("noSuchGene", "This Gene is not present in the database, please try again");
+            model.addAttribute("noSuchGene", true);
             return "/home";
         }
         model.addAttribute("genes", genes);

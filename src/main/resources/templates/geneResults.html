@@ -4,8 +4,9 @@
 </head>
 <body>
 <div th:replace="title :: title">title</div>
-<p th:text="#{results.explanation}">tableBelow</p>
+
 <div th:class="container">
+    <p th:text="#{results.explanation}">tableBelow</p>
     <table th:id="geneTable">
         <thead>
             <tr>
@@ -30,7 +31,7 @@
             </th:block>
         </tbody>
     </table>
-    <a th:text="#{results.tryAgain}" th:href="home.html">returnHome</a>
+    <a th:text="#{results.tryAgain}" th:href="home">returnHome</a>
 </div>
 </body>
 </html>

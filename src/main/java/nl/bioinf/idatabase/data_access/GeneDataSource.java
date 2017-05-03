@@ -1,9 +1,8 @@
-package nl.bioinf.idatabase.dataAccess;
+package nl.bioinf.idatabase.data_access;
 
 import nl.bioinf.idatabase.model.Gene;
 import nl.bioinf.idatabase.model.StressFactor;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**

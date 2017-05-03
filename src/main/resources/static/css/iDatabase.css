@@ -21,7 +21,7 @@
 #geneTable {
     width: 100%;
     border: solid;
-    background-color: #fcf8e3;
+    background-color: #f9fcf5;
     padding: 15px;
     align-self: center;
 }
@@ -29,7 +29,7 @@
 tr:hover {background-color: #808080}
 
 th {
-    background-color: #334d4d;
+    background-color: #535751;
     color: white;
 }
 

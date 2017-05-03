@@ -1,7 +1,7 @@
-package nl.bioinf.idatabase.dataAccess.jdbc;
+package nl.bioinf.idatabase.data_access.jdbc;
 
 
-import nl.bioinf.idatabase.dataAccess.GeneDataSource;
+import nl.bioinf.idatabase.data_access.GeneDataSource;
 import nl.bioinf.idatabase.model.Gene;
 import nl.bioinf.idatabase.model.StressFactor;
 import org.springframework.jdbc.core.JdbcTemplate;

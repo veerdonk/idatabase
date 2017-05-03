@@ -1,6 +1,6 @@
 package nl.bioinf.idatabase.service;
 
-import nl.bioinf.idatabase.dataAccess.GeneDataSource;
+import nl.bioinf.idatabase.data_access.GeneDataSource;
 import nl.bioinf.idatabase.model.Gene;
 import nl.bioinf.idatabase.model.StressFactor;
 import org.springframework.beans.factory.annotation.Autowired;

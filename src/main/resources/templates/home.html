@@ -8,22 +8,24 @@
     <div th:class="jumbotron">
         <p th:text="#{home.welcome}">welcome</p>
         <p th:text="#{home.searchGenes}">Search gene:</p>
-        <div th:class="error" th:if="${noSuchGene}" th:text="${noSuchGene}">errortest</div>
+        <div th:class="error" th:if="${noSuchGene}" th:text="#{home.noSuchGene}">errortest</div>
         <form th:id="geneForm" th:action="@{'/' + ${#locale.language} + '/gene'}">
-            <input th:id="geneId" name="geneId" type="text"/>
+            <input th:id="geneId" name="geneId" type="text" th:placeholder="SKAP2"/>
             <br/>
             <button>Search gene</button>
         </form>
         <br/>
 
-        <p th:text="#{home.searchSNP}">Search SNP:</p>
-
+        <p th:text="#{home.searchSNP}">Search SNP: </p>
+        eg: rs6748375, rs3795974
         <form th:id="snpForm" th:action="@{'/' + ${#locale.language} + '/snp'}">
-            <input th:id="snpName" th:type="text"/>
+            <input th:id="snpName" th:type="text" th:placeholder="rs6748375"/>
         </form>
         <button id="submitSNP">Search SNP</button>
     </div>
+    <a th:text="#{home.toSummary}" th:href="summary">summarylink</a>
 </div>
+
 
 
 
