@@ -12,7 +12,7 @@ import java.util.Locale;
 
 /**
  * Created by dvandeveerdonk on 8-3-17.
- * Defines configuration options for using diffrent
+ * Defines configuration options for using different
  * locales
  */
 @Configuration

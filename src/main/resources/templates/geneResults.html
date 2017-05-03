@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="header :: header">
+<!--<head th:replace="header :: header">-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{home.tabtitle}">tabTitle</title>
+    <script type="text/javascript" th:src="@{/js/jquery-2.1.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/plotly-latest.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/boxplot.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/iDatabase.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 </head>
 <body>
 <div th:replace="title :: title">title</div>
@@ -32,7 +40,10 @@
         </tbody>
     </table>
     <a th:text="#{results.tryAgain}" th:href="home">returnHome</a>
-    <div th:id="bars"/>
+    <div th:id="${geneName}" th:class="boxplot">
+
+    </div>
+
 </div>
 </body>
 </html>
