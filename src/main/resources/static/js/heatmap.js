@@ -29,7 +29,7 @@ window.onload = function() {
 
     var data = [
         {
-            z: [[1.66328471823933, 2.16203038873149], [1.68800016225311, 1.785844881168], [2.09209645744887, 1.94890829666134], [2.31512417251552, 1.74486005702482]],
+            z: [[1.66328471823933, 2.16203038873149], [1.68800016225311,], [2.09209645744887, 1.94890829666134], [2.31512417251552,]],
             x: ['4h', '24h'],
             y: ["Candida<br>albicans", 'Mycobacterium<br>tuberculosis', 'Pseudomonas<br>aeruginosa', 'Streptococcus<br>pneumoniae', 'Aspergillus<br>fumigatus', 'IL-1alpha'],
             type: 'heatmap'
