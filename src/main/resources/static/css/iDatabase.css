@@ -5,6 +5,12 @@
 
 /* End of HTML styling */
 
+.boxplot{
+    width: 450px;
+    height: 600px;
+    position: absolute;
+    margin: 0 auto;
+}
 
 #logo{
     width: 200px;

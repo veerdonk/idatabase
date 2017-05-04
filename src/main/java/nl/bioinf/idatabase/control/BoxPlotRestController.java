@@ -21,6 +21,11 @@ public class BoxPlotRestController {
     @RequestMapping(value = "/search/boxplotData")
     public List<BoxplotEntry> boxplotEntries(@RequestParam("geneName") String geneName){
         List<Gene> genes = geneService.getGene(geneName);
+
+        for(Gene gene:genes){
+            BoxplotEntry boxplotEntry = new BoxplotEntry();
+//            boxplotEntry.
+        }
         System.out.println(genes);
         return null;
     }

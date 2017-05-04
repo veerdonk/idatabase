@@ -14,7 +14,8 @@
 <div th:replace="title :: title">title</div>
 
 <div th:class="container">
-    <p th:text="#{results.explanation}">tableBelow</p>
+
+    <p th:text="${geneName} + ' ' + #{results.explanation}">tableBelow</p>
     <table th:id="geneTable">
         <thead>
             <tr>
@@ -40,10 +41,9 @@
         </tbody>
     </table>
     <a th:text="#{results.tryAgain}" th:href="home">returnHome</a>
-    <div th:id="${geneName}" th:class="boxplot">
 
-    </div>
-
+    <div th:id="${geneName}" th:class="boxplot"></div>
 </div>
+
 </body>
 </html>
