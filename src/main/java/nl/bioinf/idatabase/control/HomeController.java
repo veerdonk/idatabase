@@ -1,7 +1,6 @@
 package nl.bioinf.idatabase.control;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Locale;
@@ -32,8 +31,6 @@ public class HomeController {
      * @return reference to the home.html template
      */
     @RequestMapping(value = "/{locale}/home")
-    public String homeWithLocale() {
-        return "home";
-    }
+    public String homeWithLocale() {return "home";}
 }
 

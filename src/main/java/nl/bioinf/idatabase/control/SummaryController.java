@@ -4,6 +4,7 @@ package nl.bioinf.idatabase.control;
 import nl.bioinf.idatabase.model.ChartTemplate;
 import nl.bioinf.idatabase.model.StressFactor;
 import nl.bioinf.idatabase.service.GeneService;
+import nl.bioinf.idatabase.service.SnpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,9 @@ public class SummaryController {
      */
     @Autowired
     GeneService geneService;
+
+    @Autowired
+    SnpService snpService;
 
     /**
      * listens for summary page request
@@ -55,4 +59,10 @@ public class SummaryController {
         }
         return chartData;
     }
+    @RequestMapping(value = "/{locale}/snpTest")
+    public String snpTest(){
+        snpService.getSnps("rs4467033");
+        return "/summary";
+    }
+
 }
