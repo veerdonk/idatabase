@@ -10,5 +10,5 @@ import java.util.Map;
  */
 public interface SnpDataSource {
     Map getSnpById(String snpId);
-    List<SNP> getSnpByGeneName(String geneName);
+    Map<String, List<SNP>> getSnpByGeneName(String geneName);
 }

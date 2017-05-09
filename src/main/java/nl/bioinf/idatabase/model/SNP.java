@@ -2,6 +2,8 @@ package nl.bioinf.idatabase.model;
 
 /**
  * Created by dvandeveerdonk on 8-5-17.
+ * Describes the SNP object
+ * used as a template for data from a database
  */
 public class SNP {
     private int qtlId;
@@ -11,6 +13,16 @@ public class SNP {
 
     public int getQtlId() {
         return qtlId;
+    }
+
+    @Override
+    public String toString() {
+        return "SNP{" +
+                "qtlId=" + qtlId +
+                ", snp='" + snp + '\'' +
+                ", types='" + types + '\'' +
+                ", pval=" + pval +
+                '}';
     }
 
     public void setQtlId(int qtlId) {

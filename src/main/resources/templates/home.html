@@ -26,7 +26,9 @@
     <a th:text="#{home.toSummary}" th:href="summary">summarylink</a>
 </div>
 
-
+<form th:action="@{'/' + ${#locale.language} + '/snp'}">
+    <input th:id="id" th:name="id" th:type="text"/>
+</form>
 
 
 </body>

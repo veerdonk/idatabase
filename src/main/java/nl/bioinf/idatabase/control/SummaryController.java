@@ -59,10 +59,4 @@ public class SummaryController {
         }
         return chartData;
     }
-    @RequestMapping(value = "/{locale}/snpTest")
-    public String snpTest(){
-        snpService.getSnps("rs4467033");
-        return "/summary";
-    }
-
 }
