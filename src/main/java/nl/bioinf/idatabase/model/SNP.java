@@ -8,21 +8,28 @@ package nl.bioinf.idatabase.model;
 public class SNP {
     private int qtlId;
     private String snp;
-    private String types;
+    private String cell_type;
     private double pval;
+    private String qtl_type;
+
+    public String getQtl_type() {
+        return qtl_type;
+    }
+
+    public void setQtl_type(String qtl_type) {
+        this.qtl_type = qtl_type;
+    }
+
+    public String getCell_type() {
+        return cell_type;
+    }
+
+    public void setCell_type(String cell_type) {
+        this.cell_type = cell_type;
+    }
 
     public int getQtlId() {
         return qtlId;
-    }
-
-    @Override
-    public String toString() {
-        return "SNP{" +
-                "qtlId=" + qtlId +
-                ", snp='" + snp + '\'' +
-                ", types='" + types + '\'' +
-                ", pval=" + pval +
-                '}';
     }
 
     public void setQtlId(int qtlId) {
@@ -35,14 +42,6 @@ public class SNP {
 
     public void setSnp(String snp) {
         this.snp = snp;
-    }
-
-    public String getTypes() {
-        return types;
-    }
-
-    public void setTypes(String types) {
-        this.types = types;
     }
 
     public double getPval() {

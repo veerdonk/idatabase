@@ -20,11 +20,11 @@ public class SnpService {
     @Autowired
     SnpDataSource snpDataSource;
 
-    public Map<String, List<SNP>> getSnps(String id){
+    public List<SNP> getSnps(String id){
         return snpDataSource.getSnpById(id);
     }
 
-    public Map<String, List<SNP>> getSnpByGene(String geneName){
+    public List<SNP> getSnpByGene(String geneName){
         return snpDataSource.getSnpByGeneName(geneName);
     }
 
