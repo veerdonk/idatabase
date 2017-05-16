@@ -21,7 +21,7 @@ public class SummaryController {
      */
     @RequestMapping(value = "/{locale}/summary")
     public String summary(){
-        snpService.getSnpByGene("BAALC");
+//        snpService.getSnpByGene("BAALC");
         return "/summary";
     }
 }

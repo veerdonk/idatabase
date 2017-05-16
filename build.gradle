@@ -28,6 +28,7 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.data:spring-data-mongodb:1.7.0.RELEASE')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	runtime('mysql:mysql-connector-java')

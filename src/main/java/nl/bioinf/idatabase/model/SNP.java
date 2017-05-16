@@ -5,8 +5,8 @@ package nl.bioinf.idatabase.model;
  * Describes the SNP object
  * used as a template for data from a database
  */
+
 public class SNP {
-    private int qtlId;
     private String snp;
     private String cell_type;
     private double pval;
@@ -26,14 +26,6 @@ public class SNP {
 
     public void setCell_type(String cell_type) {
         this.cell_type = cell_type;
-    }
-
-    public int getQtlId() {
-        return qtlId;
-    }
-
-    public void setQtlId(int qtlId) {
-        this.qtlId = qtlId;
     }
 
     public String getSnp() {

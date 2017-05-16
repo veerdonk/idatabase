@@ -1,7 +1,9 @@
 package nl.bioinf.idatabase.service;
 
 import nl.bioinf.idatabase.data_access.SnpDataSource;
+import nl.bioinf.idatabase.data_access.mongo.SnpDataSourceMongo;
 import nl.bioinf.idatabase.model.SNP;
+import nl.bioinf.idatabase.model.SnpEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +18,15 @@ import java.util.Map;
  */
 @Service
 public class SnpService {
-
     @Autowired
     SnpDataSource snpDataSource;
 
-    public List<SNP> getSnps(String id){
+    public SnpEntry getSnps(String id){
         return snpDataSource.getSnpById(id);
     }
 
-    public List<SNP> getSnpByGene(String geneName){
-        return snpDataSource.getSnpByGeneName(geneName);
+    public List<SnpEntry> getSnpByGene(String geneName, int region){
+        return snpDataSource.getSnpByGeneName(geneName, region);
     }
 
 }
