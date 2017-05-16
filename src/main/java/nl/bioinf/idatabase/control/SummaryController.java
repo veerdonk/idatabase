@@ -13,15 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SummaryController {
 
-    @Autowired
-    SnpService snpService;
     /**
      * listens for summary page request
      * @return reference to the summary.html template
      */
     @RequestMapping(value = "/{locale}/summary")
     public String summary(){
-//        snpService.getSnpByGene("BAALC");
         return "/summary";
     }
 }

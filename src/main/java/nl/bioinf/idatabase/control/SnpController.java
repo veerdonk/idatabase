@@ -52,16 +52,15 @@ public class SnpController {
     @ResponseBody
     @RequestMapping(value = "/api/getSnpFromDb")
     public List<SnpEntry> getSnps(@RequestParam("qtlId") String id, @RequestParam(value = "region", required = false) Integer region){
-        System.out.println(id); //TODO remove printlines
         List<SnpEntry> snps = new ArrayList<>();
         if(id.matches("rs\\d*")){
-            System.out.println("match");
             snps.add(snpService.getSnps(id));
-            System.out.println(snps);
             return snps;
         }
         else{
-            System.out.println(snpService.getSnpByGene(id, region));
+            if(region==null){
+                region=0;
+            }
            return snpService.getSnpByGene(id, region);
         }
     }

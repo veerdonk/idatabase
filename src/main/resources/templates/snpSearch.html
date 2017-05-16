@@ -1,4 +1,4 @@
-<div th:fragment="snpSearch">
+<div th:fragment="snpSearch" th:class="hidden" th:id="snpSearch">
     <form th:id="qtlForm" th:action="@{'/' + ${#locale.language} + '/snp'}">
         <input th:id="qtlId" th:name="qtlId" th:type="text" th:placeholder="rs1234567"/> <br/>
         <input th:id="region" th:name="region" th:type="text" th:placeholder="250000"/> <br/>

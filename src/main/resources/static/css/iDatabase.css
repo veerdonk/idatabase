@@ -3,6 +3,13 @@
     color: red;
 }
 
+.hidden{
+    display: none;
+}
+
+.shown{
+    display: block;
+}
 /* End of HTML styling */
 
 .boxplot{

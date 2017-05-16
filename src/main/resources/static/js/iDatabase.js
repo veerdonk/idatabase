@@ -21,6 +21,11 @@ window.onload = function() {
             $('#geneId').val(geneName);
             $('#geneForm').submit();
         })
-    })
+    });
+
+    $('#switch').click(function () {
+        $('.hidden').toggle();
+        $('.shown').toggle();
+    });
 
 };
