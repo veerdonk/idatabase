@@ -44,13 +44,14 @@ public class SnpRestController {
             EnsemblId ensId = ensemblId(gene);
             gene = ensId.getId();
         }
-        GeneMetaData ensemblGene = ensemblGene(gene);
-        EnsemblSNP[] snps = getSnps(ensemblGene.getSeq_region_name(), ensemblGene.getStart(), ensemblGene.getEnd(), region);
+        GeneMetaData gmd = ensemblGene(gene);
 
-        ensemblGene.setNumberOfSnps(snps.length);
-        ensemblGene.setSnps(Arrays.asList(snps));
+        EnsemblSNP[] snps = getSnps(gmd.getSeq_region_name(), gmd.getStart(), gmd.getEnd(), region);
 
-        return ensemblGene;
+        gmd.setNumberOfSnps(snps.length);
+        gmd.setSnps(Arrays.asList(snps));
+
+        return gmd;
     }
 
     /**

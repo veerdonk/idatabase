@@ -61,6 +61,7 @@ public class SnpController {
             if(region==null){
                 region=0;
             }
+            System.out.println(snpService.getSnpByGene(id, region).size());
            return snpService.getSnpByGene(id, region);
         }
     }
