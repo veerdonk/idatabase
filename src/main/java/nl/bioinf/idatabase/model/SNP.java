@@ -43,4 +43,14 @@ public class SNP {
     public void setPval(double pval) {
         this.pval = pval;
     }
+
+    @Override
+    public String toString() {
+        return "SNP{" +
+                "snp='" + snp + '\'' +
+                ", cell_type='" + cell_type + '\'' +
+                ", pval=" + pval +
+                ", qtl_type='" + qtl_type + '\'' +
+                '}';
+    }
 }

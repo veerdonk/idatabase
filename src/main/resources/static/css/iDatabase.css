@@ -12,23 +12,13 @@
 }
 /* End of HTML styling */
 
-.boxplot{
-    width: 450px;
-    height: 600px;
-    position: absolute;
-    margin: 0 auto;
+#heatmap{
+    height: 1000px;
 }
 
 #logo{
     width: 200px;
     height: auto;
-}
-
-#stressPlot {
-    width: 450px;
-    height: 200px;
-    position: absolute;
-    margin: 0 auto;
 }
 
 #geneTable {
