@@ -6,14 +6,35 @@
     <script type="text/javascript" th:src="@{/js/jquery-2.1.1.js}"></script>
     <script type="text/javascript" th:src="@{/js/plotly-latest.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/heatmap.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script>
     <link rel="stylesheet" th:href="@{/css/iDatabase.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+
 </head>
 <body>
 <div th:replace="title::title">title</div>
 
 <div th:id="${snpId}" th:class="snps"></div>
 <div th:id="${region}" th:class="region"></div>
+
+<table id="snpTable" cellspacing="0" width="100%">
+    <thead>
+    <tr>
+        <th>snp</th>
+        <th>cell_type</th>
+        <th>pval</th>
+        <th>qtl_type</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>snp</th>
+        <th>cell_type</th>
+        <th>pval</th>
+        <th>qtl_type</th>
+    </tr>
+    </tfoot>
+</table>
 
 <div th:id="heatmap"></div>
 

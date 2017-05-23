@@ -3,6 +3,7 @@ package nl.bioinf.idatabase.control;
 import nl.bioinf.idatabase.model.HeatmapData;
 import nl.bioinf.idatabase.model.SNP;
 import nl.bioinf.idatabase.model.SnpEntry;
+import nl.bioinf.idatabase.model.dataTablesData;
 import nl.bioinf.idatabase.service.SnpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,13 @@ public class SnpController {
         return "/snpPage";
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/api/getSnpFromDb")
+    public SnpEntry getSnp(@RequestParam("snpId") String snpId){
+        return snpService.getSnps(snpId);
+    }
+
+
     /**
      * Based on a given snp identifier (rsid or genename) this method
      * uses snpService to retrieve all snps from the database that
@@ -52,8 +60,8 @@ public class SnpController {
      * @return a list of SnpEntry objects (contains multiple snps)
      */
     @ResponseBody
-    @RequestMapping(value = "/api/getSnpFromDb")
-    public HeatmapData getSnps(@RequestParam("qtlId") String id, @RequestParam(value = "region", required = false) Integer region){
+    @RequestMapping(value = "/api/getHeatmapSnpFromDb")
+    public HeatmapData getHeatmapSnps(@RequestParam("qtlId") String id, @RequestParam(value = "region", required = false) Integer region){
         List<SnpEntry> snps = new ArrayList<>();
         if(id.matches("rs\\d*")){
             snps.add(snpService.getSnps(id));
@@ -63,8 +71,31 @@ public class SnpController {
             if(region==null){
                 region=0;
             }
-            System.out.println(snpService.getSnpByGene(id, region).size());
            return heatmap(snpService.getSnpByGene(id, region), "cytokine");
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/api/tableData")
+    public dataTablesData dataTables(@RequestParam("qtlId") String id, @RequestParam(value = "region", required = false) Integer region){
+        dataTablesData dataTablesData = new dataTablesData();
+        if(id.matches("rs\\d*")){
+            System.out.println(snpService.getSnps(id).getSnps());
+            dataTablesData.setData(snpService.getSnps(id).getSnps());
+            return dataTablesData;
+
+        }
+        else{
+            if(region==null){
+                region=0;
+            }
+            ArrayList<SNP> snps = new ArrayList<>();
+
+            for(SnpEntry snpEntry :snpService.getSnpByGene(id, region)){
+                snps.addAll(snpEntry.getSnps());
+            }
+            dataTablesData.setData(snps);
+            return dataTablesData;
         }
     }
 
@@ -83,31 +114,22 @@ public class SnpController {
         }
         hmp.setX(columns);
         int arrLen = columns.size();
-        System.out.println(arrLen);
+        System.out.println(columns);
 
         ArrayList<String> rows = new ArrayList<>();
-        ArrayList<Double[]> values = new ArrayList<>();
-        for(SnpEntry snpEntry:snps){
-            Double[] curSnpValues = new Double[arrLen];
-            for(SNP snp:snpEntry.getSnps()){
-                if(Objects.equals(snp.getQtl_type(), qtlType)){
-                    assert curSnpValues != null;
-                    int i = columns.indexOf(snp.getCell_type());
-                    curSnpValues[i] = snp.getPval();// hier gaat het nog goed
-                }
-                else{
-                    curSnpValues = null;
-                }
-            }
-            if(curSnpValues != null){
-                rows.add(snpEntry.getId());
-                Collections.addAll(values, curSnpValues);//Add verplaatst alle null waarden naar eind van array = niet goed.... verdorie
-//                values.add(curSnpValues);
-            }
+        List<Double[]> values = new ArrayList<>();
 
-        }
-        for(Double[] val:values){
-            System.out.println(Arrays.toString(val));
+        for(SnpEntry snpEntry : snps){
+            Double[] curSnpValues = new Double[arrLen];
+            for(SNP snp : snpEntry.getSnps()){
+                if(Objects.equals(snp.getQtl_type(), qtlType)){
+                    curSnpValues[columns.indexOf(snp.getCell_type())] = snp.getPval();
+                }
+            }
+            if(!Arrays.equals(curSnpValues, new Double[arrLen])){
+                values.add(curSnpValues);
+            }
+            rows.add(snpEntry.getId());
         }
         hmp.setZ(values);
         hmp.setY(rows);

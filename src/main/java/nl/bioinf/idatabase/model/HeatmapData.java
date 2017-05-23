@@ -2,12 +2,13 @@ package nl.bioinf.idatabase.model;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by dvandeveerdonk on 22-5-17.
  */
 public class HeatmapData {
-    private ArrayList<Double[]> z;
+    private List<Double[]> z;
     private ArrayList<String> x;
     private ArrayList<String> y;
 
@@ -37,11 +38,11 @@ public class HeatmapData {
         this.y = y;
     }
 
-    public ArrayList<Double[]> getZ() {
+    public List<Double[]> getZ() {
         return z;
     }
 
-    public void setZ(ArrayList<Double[]> z) {
+    public void setZ(List<Double[]> z) {
         this.z = z;
     }
 }
