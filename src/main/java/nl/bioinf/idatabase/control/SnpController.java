@@ -75,12 +75,12 @@ public class SnpController {
         }
     }
 
+    //TODO write docs/merge with getheatmapsnp
     @ResponseBody
     @RequestMapping(value = "/api/tableData")
     public dataTablesData dataTables(@RequestParam("qtlId") String id, @RequestParam(value = "region", required = false) Integer region){
         dataTablesData dataTablesData = new dataTablesData();
         if(id.matches("rs\\d*")){
-            System.out.println(snpService.getSnps(id).getSnps());
             dataTablesData.setData(snpService.getSnps(id).getSnps());
             return dataTablesData;
 
@@ -99,6 +99,7 @@ public class SnpController {
         }
     }
 
+    //TODO write docs
     public HeatmapData heatmap(List<SnpEntry> snps, String qtlType){
         HeatmapData hmp = new HeatmapData();
         ArrayList<String> columns = new ArrayList<>();
@@ -112,9 +113,10 @@ public class SnpController {
                 }
             }
         }
+        Collections.sort(columns);
         hmp.setX(columns);
         int arrLen = columns.size();
-        System.out.println(columns);
+        System.out.println(arrLen);//TODO remove printlines \/
 
         ArrayList<String> rows = new ArrayList<>();
         List<Double[]> values = new ArrayList<>();
@@ -123,13 +125,16 @@ public class SnpController {
             Double[] curSnpValues = new Double[arrLen];
             for(SNP snp : snpEntry.getSnps()){
                 if(Objects.equals(snp.getQtl_type(), qtlType)){
-                    curSnpValues[columns.indexOf(snp.getCell_type())] = snp.getPval();
+                    if(!rows.contains(snpEntry.getId())){
+                        rows.add(snpEntry.getId());
+                    }
+                    curSnpValues[columns.indexOf(snp.getCell_type())] = Math.log10(snp.getPval());
                 }
             }
             if(!Arrays.equals(curSnpValues, new Double[arrLen])){
                 values.add(curSnpValues);
             }
-            rows.add(snpEntry.getId());
+
         }
         hmp.setZ(values);
         hmp.setY(rows);
