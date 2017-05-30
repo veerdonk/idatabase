@@ -116,7 +116,7 @@ public class SnpController {
         Collections.sort(columns);
         hmp.setX(columns);
         int arrLen = columns.size();
-        System.out.println(arrLen);//TODO remove printlines \/
+        System.out.println(arrLen);//TODO remove printlines
 
         ArrayList<String> rows = new ArrayList<>();
         List<Double[]> values = new ArrayList<>();

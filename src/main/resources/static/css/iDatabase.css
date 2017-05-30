@@ -22,9 +22,10 @@
 .shown{
     display: block;
 }
-/* End of HTML styling */
 
-#heatmap{
+#snpTableWrapper{
+    width: 60%;
+    margin: 5% auto 5%;
 }
 
 #logo{
@@ -39,6 +40,14 @@
     padding: 15px;
     align-self: center;
 }
+
+#heatmap{
+    margin-left: auto;
+    margin-right: auto;
+}
+/* End of HTML styling */
+
+
 /*DataTables styling */
 /*
  * Table styles

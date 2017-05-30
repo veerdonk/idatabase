@@ -35,22 +35,6 @@ window.onload = function() {
         ]
     });
 
-    // var table = $('#snpTable').DataTable( {
-    //     "ajax" : tableUrl,
-    //     "columns" : [
-    //         {"data": "snp"},
-    //         {"data": "cell_type"},
-    //         {"data": "pval"},
-    //         {"data": "qtl_type"}
-    //     ],
-    //     lengthChange: false,
-    //     buttons: [ 'copy', 'excel', 'pdf', 'csv', 'print']
-    // } );
-    //
-    // table.buttons().container()
-    //     .appendTo( '#snpTableWrapper .col-md-6:eq(0)' );
-
-
     $.ajax({
         url: ajaxUrl
     }).then(function (response) {
