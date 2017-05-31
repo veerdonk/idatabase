@@ -41,7 +41,7 @@ public class SnpController {
         if(region != null){
             model.addAttribute("region", region);
         }
-        return "/snpPage";
+        return "snpPage";
     }
 
     @ResponseBody

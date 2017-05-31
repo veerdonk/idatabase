@@ -63,6 +63,7 @@ window.onload = function() {
             },
             height: h+250,
             width: w
+
         };
 
         Plotly.newPlot('heatmap', data, layout);
