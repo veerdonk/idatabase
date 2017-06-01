@@ -28,4 +28,11 @@ window.onload = function() {
         $('.shown').toggle();
     });
 
+    $('#addRegionButton').click(function () {
+        $('.addRegion').toggle();
+    });
+
+    $('#multiSnp').click(function(){
+
+    })
 };

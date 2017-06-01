@@ -11,14 +11,22 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-2.2.4/jszip-3.1.3/pdfmake-0.1.27/dt-1.10.15/b-1.3.1/b-colvis-1.3.1/b-flash-1.3.1/b-html5-1.3.1/b-print-1.3.1/r-2.1.1/datatables.min.js"></script>
-
 </head>
 <body>
 <div th:replace="title::title">title</div>
 
 <div th:id="${snpId}" th:class="snps"></div>
 <div th:id="${region}" th:class="region"></div>
-
+<div th:id="test">test tekst</div>
+<div th:id="test" class="dropdown">
+    <button class="dropbtn">Show Heatmap</button>
+    <div class="dropdown-content">
+        <a href="#" th:id="cytokine" th:class="selectedQtl">Cytokines</a>
+        <a href="#" th:id="cellCount" th:class="selectedQtl">Cell counts</a>
+        <a href="#" th:id="hormones" th:class="selectedQtl">hormones</a>
+        <a href="#" th:id="immuneModulator" th:class="selectedQtl">Immune modulators</a>
+    </div>
+</div>
 <div th:id="snpTableWrapper">
     <table id="snpTable" class="display" width="100%">
         <thead>
@@ -39,8 +47,10 @@
         </tfoot>
     </table>
 </div>
+
 <p th:id="tooMuchDataError" th:class="error" th:text="#{snpPage.toMuchData}"></p>
-<!--<div th:id="infoBar" class="scrollingBar">TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST</div>-->
+<div th:id="prev15" th:class="hidden">previous 15</div> <div th:id="next15" th:class="hidden">next 15</div>
+
 <div th:id="heatmapContainer">
     <div th:id="heatmap"></div>
 </div>

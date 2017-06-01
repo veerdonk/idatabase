@@ -44,6 +44,12 @@ public class SnpController {
         return "snpPage";
     }
 
+    @RequestMapping(value = "/{locale}/multiSnp")
+    public String multiSnp(Model model, @RequestParam("snps") String snps){
+        model.addAttribute("snpId", snps);
+        return "snpPage";
+    }
+
     @ResponseBody
     @RequestMapping(value = "/api/getSnpFromDb")
     public SnpEntry getSnp(@RequestParam("snpId") String snpId){
@@ -61,17 +67,17 @@ public class SnpController {
      */
     @ResponseBody
     @RequestMapping(value = "/api/getHeatmapSnpFromDb")
-    public HeatmapData getHeatmapSnps(@RequestParam("qtlId") String id, @RequestParam(value = "region", required = false) Integer region){
+    public List<HeatmapData> getHeatmapSnps(@RequestParam("qtlId") String id, @RequestParam(value = "qtl") String qtl, @RequestParam(value = "region", required = false) Integer region){
         List<SnpEntry> snps = new ArrayList<>();
         if(id.matches("rs\\d*")){
             snps.add(snpService.getSnps(id));
-            return heatmap(snps, "cytokine");
+            return heatmap(snps, qtl);
         }
         else{
             if(region==null){
                 region=0;
             }
-           return heatmap(snpService.getSnpByGene(id, region), "cytokine");
+           return heatmap(snpService.getSnpByGene(id, region), qtl);
         }
     }
 
@@ -80,17 +86,25 @@ public class SnpController {
     @RequestMapping(value = "/api/tableData")
     public dataTablesData dataTables(@RequestParam("qtlId") String id, @RequestParam(value = "region", required = false) Integer region){
         dataTablesData dataTablesData = new dataTablesData();
-        if(id.matches("rs\\d*")){
-            dataTablesData.setData(snpService.getSnps(id).getSnps());
-            return dataTablesData;
+        ArrayList<SNP> snps = new ArrayList<>();
 
+        if(id.matches("rs\\d*(.*)")){
+            if(id.matches("(.*),(.*)")){
+                System.out.println(id.split(","));
+                for(String snp : id.split(",")){
+                    snps.addAll(snpService.getSnps(snp).getSnps());
+                }
+                dataTablesData.setData(snps);
+            }
+            else{
+                dataTablesData.setData(snpService.getSnps(id).getSnps());
+            }
+            return dataTablesData;
         }
         else{
             if(region==null){
                 region=0;
             }
-            ArrayList<SNP> snps = new ArrayList<>();
-
             for(SnpEntry snpEntry :snpService.getSnpByGene(id, region)){
                 snps.addAll(snpEntry.getSnps());
             }
@@ -100,7 +114,7 @@ public class SnpController {
     }
 
     //TODO write docs
-    public HeatmapData heatmap(List<SnpEntry> snps, String qtlType){
+    public List<HeatmapData> heatmap(List<SnpEntry> snps, String qtlType){
         HeatmapData hmp = new HeatmapData();
         ArrayList<String> columns = new ArrayList<>();
         for(SnpEntry snpEntry:snps){
@@ -116,7 +130,6 @@ public class SnpController {
         Collections.sort(columns);
         hmp.setX(columns);
         int arrLen = columns.size();
-        System.out.println(arrLen);//TODO remove printlines
 
         ArrayList<String> rows = new ArrayList<>();
         List<Double[]> values = new ArrayList<>();
@@ -136,10 +149,25 @@ public class SnpController {
             }
 
         }
-        hmp.setZ(values);
-        hmp.setY(rows);
-        hmp.setType("heatmap");
+        ArrayList<HeatmapData> heatmapParts = new ArrayList<>();
 
-        return hmp;
+        if(rows.size()>15){
+            int j;
+            int stop = 15;
+            for (j = 0; j <= rows.size(); j += 15) {
+                if(j > rows.size()-15){
+                    stop = rows.size();
+                }
+                HeatmapData hmd = new HeatmapData();
+                hmd.setZ(values.subList(j, stop));
+                hmd.setY(rows.subList(j, stop));
+                stop += 15;
+                hmd.setX(columns);
+                hmd.setType("heatmap");
+                heatmapParts.add(hmd);
+            }
+
+        }
+        return heatmapParts;
     }
 }

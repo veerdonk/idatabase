@@ -1,7 +1,19 @@
 <div th:fragment="snpSearch" th:class="hidden" th:id="snpSearch">
     <form th:id="qtlForm" th:action="@{'/' + ${#locale.language} + '/snp'}">
-        <input th:id="qtlId" th:name="qtlId" th:type="text" th:placeholder="rs1234567"/> <br/>
-        <input th:id="region" th:name="region" th:type="text" th:placeholder="250000"/> <br/>
+        <label th:id="snpGene"> SNP or Gene:
+        <input th:id="qtlId" th:name="qtlId" th:type="text" th:placeholder="rs1234567"/>
+        </label><br/>
+        <a href="#" id="addRegionButton">add region</a><br/>
+        <div th:class="addRegion">
+        <label th:id="regionLabel"> Region around gene:
+        <input th:id="region" th:name="region" th:type="text" th:placeholder="250000"/>
+        </label><br/>
+        </div>
+        <button>Search for SNPs</button>
+    </form>
+
+    <form th:id="multiSnpForm" th:action="@{'/' + ${#locale.language} + '/multiSnp'}">
+        <textarea id="snps" name="snps" type="text"></textarea>
         <button>Search for SNPs</button>
     </form>
 </div>

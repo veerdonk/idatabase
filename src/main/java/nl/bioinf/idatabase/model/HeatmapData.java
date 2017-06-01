@@ -1,6 +1,5 @@
 package nl.bioinf.idatabase.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +7,29 @@ import java.util.List;
  * Created by dvandeveerdonk on 22-5-17.
  */
 public class HeatmapData {
+    private String qtl;
     private List<Double[]> z;
-    private ArrayList<String> x;
-    private ArrayList<String> y;
+    private List<String> x;
+    private List<String> y;
+
+    @Override
+    public String toString() {
+        return "HeatmapData{" +
+                "qtl='" + qtl + '\'' +
+                ", z=" + z +
+                ", x=" + x +
+                ", y=" + y +
+                ", type='" + type + '\'' +
+                '}';
+    }
+
+    public String getQtl() {
+        return qtl;
+    }
+
+    public void setQtl(String qtl) {
+        this.qtl = qtl;
+    }
 
     private String type;
 
@@ -22,19 +41,19 @@ public class HeatmapData {
         this.type = type;
     }
 
-    public ArrayList<String> getX() {
+    public List<String> getX() {
         return x;
     }
 
-    public void setX(ArrayList<String> x) {
+    public void setX(List<String> x) {
         this.x = x;
     }
 
-    public ArrayList<String> getY() {
+    public List<String> getY() {
         return y;
     }
 
-    public void setY(ArrayList<String> y) {
+    public void setY(List<String> y) {
         this.y = y;
     }
 

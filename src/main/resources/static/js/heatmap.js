@@ -8,17 +8,16 @@ window.onload = function() {
 
 
     if(region!=null){
-        ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&region='+region;
+        // ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&region='+region;
         tableUrl = '/api/tableData?qtlId='+snpId+'&region='+region;
     }
     else{
-        ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId;
+        // ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId;
         tableUrl = '/api/tableData?qtlId='+snpId;
     }
 
     $('#snpTable').DataTable({
         dom: 'lBfrtip',
-
         buttons:[
             {
                 extend: 'collection',
@@ -35,52 +34,74 @@ window.onload = function() {
         ]
     });
 
-    $.ajax({
-        url: ajaxUrl
-    }).then(function (response) {
-        var data = [response];
-        var h = data[0]["y"].length*17.5;
-        var w = data[0]["x"].length*20;
-        if(h<100){
-            h=100;
+    $('.selectedQtl').click(function () {
+        var qtl = this.id;
+        console.log(qtl);
+        if(region!=null){
+            ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&qtl='+qtl+'&region='+region;
         }
-        if(h>3500){
-            $('#tooMuchDataError').toggle();
-            h=3500;
+        else{
+            ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&qtl='+qtl;
         }
-        if(w<600){
-            w=600;
-        }
-        console.log(data[0]["x"].length);
-        console.log(w);
-        var layout = {
-            margin: {
-                l: 100,
-                r: 100,
-                b: 250,
-                t: 20,
-                pad: 4
-            },
-            height: h+250,
-            width: w
+        $.ajax({
+            url: ajaxUrl
+        }).then(function (response) {
+            var data = [response[0]];
+            var h = data[0]["y"].length*17.5;
+            var w = data[0]["x"].length*20;
 
-        };
+            if(h<100){
+                h=100;
+            }
 
-        Plotly.newPlot('heatmap', data, layout);
+            if(h>3500){
+                $('#tooMuchDataError').toggle();
+                h=3500;
+            }
+            if(w<600){
+                w=600;
+            }
+
+            var layout = {
+                margin: {
+                    l: 100,
+                    r: 100,
+                    b: 250,
+                    t: 20,
+                    pad: 4
+                },
+                height: h+250,
+                width: w
+
+            };
+            var pos = 0;
+            var max = response.length;
+            Plotly.newPlot('heatmap', [response[pos]], layout);
+            $('.hidden').show();
+            window.scrollTo(0,document.body.scrollHeight);
+            $('#next15').click(function () {
+                var r = $.Deferred();
+                pos += 1;
+                if(pos >= max-1){
+                    pos = max-1;
+                }
+                console.log([response[pos]]);
+                Plotly.newPlot('heatmap', [response[pos]], layout);
+                r.resolve;
+            });
+
+            $('#prev15').click(function () {
+                pos -= 1;
+                if(pos <= 0){
+                    pos = 0;
+                }
+                Plotly.newPlot('heatmap', [response[pos]], layout);
+            })
+        });
     });
 
-    var scrollInfo = $('.scrollingBar');
-    var scrollClass = 'scrollingBar-scrolled';
 
-    $(window).scroll(function(){
-        console.log($(this).scrollTop.height());
-        if($(this).scrollTop > 217){
-            console.log($(this).scrollTop);
-            scrollInfo.addClass(scrollClass);
-        }else {
-            scrollInfo.removeClass(scrollClass);
-        }
-    });
+
 
 };
 
