@@ -2,6 +2,7 @@
  * Created by dvandeveerdonk on 3-5-17.
  */
 window.onload = function() {
+    console.log('Heatmap.js started');
     var snpId = $('.snps').first().attr('id');
     var region = $('.region').first().attr('id');
 
@@ -39,6 +40,7 @@ window.onload = function() {
         console.log(qtl);
         if(region!=null){
             ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&qtl='+qtl+'&region='+region;
+            console.log(ajaxUrl);
         }
         else{
             ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&qtl='+qtl;
@@ -46,6 +48,7 @@ window.onload = function() {
         $.ajax({
             url: ajaxUrl
         }).then(function (response) {
+            console.log(response);
             var data = [response[0]];
             var h = data[0]["y"].length*17.5;
             var w = data[0]["x"].length*20;
@@ -77,7 +80,7 @@ window.onload = function() {
             var pos = 0;
             var max = response.length;
             Plotly.newPlot('heatmap', [response[pos]], layout);
-            $('.hidden').show();
+            $('.hidden').addClass('pagebutton');
             window.scrollTo(0,document.body.scrollHeight);
             $('#next15').click(function () {
                 var r = $.Deferred();

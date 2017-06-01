@@ -20,7 +20,7 @@ import java.util.List;
 public class SnpDataSourceMongo implements SnpDataSource {
 
     @Autowired
-    private SnpRepository snpRepository;
+    SnpRepository snpRepository;
 
     @Autowired
     SnpRestController snpRestController;

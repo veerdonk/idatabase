@@ -1,5 +1,7 @@
 package nl.bioinf.idatabase.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Created by dvandeveerdonk on 8-5-17.
  * Describes the SNP object
