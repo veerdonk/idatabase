@@ -6,19 +6,15 @@ window.onload = function() {
     var snpId = $('.snps').first().attr('id');
     var region = $('.region').first().attr('id');
 
-
-
     if(region!=null){
-        // ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&region='+region;
         tableUrl = '/api/tableData?qtlId='+snpId+'&region='+region;
     }
     else{
-        // ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId;
         tableUrl = '/api/tableData?qtlId='+snpId;
     }
 
     $('#snpTable').DataTable({
-        dom: 'lBfrtip',
+        dom: 'lB<"toolbar">frtip',
         buttons:[
             {
                 extend: 'collection',
@@ -34,7 +30,7 @@ window.onload = function() {
             {"data": "qtl_type"}
         ]
     });
-
+    $("div.toolbar").html('<div th:id="dropdownContainer" class="dropdown"> <button id="heatmapButton" class="dt-buttons">Generate Heatmap</button> <div class="dropdown-content"> <a href="#" th:id="cytokine" th:class="selectedQtl">Cytokines</a> <a href="#" th:id="cellCount" th:class="selectedQtl">Cell counts</a> <a href="#" th:id="hormones" th:class="selectedQtl">hormones</a> <a href="#" th:id="immuneModulator" th:class="selectedQtl">Immune modulators</a> </div> </div>');
     $('.selectedQtl').click(function () {
         var qtl = this.id;
         console.log(qtl);

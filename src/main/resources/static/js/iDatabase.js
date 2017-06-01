@@ -1,6 +1,7 @@
 /**
  * Created by dvandeveerdonk on 23-3-17.
  * used for autocomplteting fields in browser
+ * and more basic functionality
  */
 window.onload = function(){
     $('#geneId').autocomplete({

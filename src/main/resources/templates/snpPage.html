@@ -17,7 +17,7 @@
 
 <div th:id="${snpId}" th:class="snps"></div>
 <div th:id="${region}" th:class="region"></div>
-<div th:id="dropdownContainer" class="dropdown">
+<!--<div th:id="dropdownContainer" class="dropdown">
     <button class="dropbtn">Show Heatmap</button>
     <div class="dropdown-content">
         <a href="#" th:id="cytokine" th:class="selectedQtl">Cytokines</a>
@@ -25,7 +25,7 @@
         <a href="#" th:id="hormones" th:class="selectedQtl">hormones</a>
         <a href="#" th:id="immuneModulator" th:class="selectedQtl">Immune modulators</a>
     </div>
-</div>
+</div>-->
 <div th:id="snpTableWrapper">
     <table id="snpTable" class="display" width="100%">
         <thead>
@@ -48,10 +48,9 @@
 </div>
 
 <p th:id="tooMuchDataError" th:class="error" th:text="#{snpPage.toMuchData}"></p>
-<button th:id="prev15" class="hidden">previous 15</button> <button th:id="next15" class="hidden">next 15</button>
+<div th:id="prev15" th:class="hidden">previous 15</div> <div th:id="next15" th:class="hidden">next 15</div>
 
 <div th:id="heatmapContainer">
-
     <div th:id="heatmap"></div>
 </div>
 </body>

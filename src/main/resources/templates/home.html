@@ -6,7 +6,9 @@
 <div th:replace="title::title">title</div>
 <div th:class="container">
     <div th:class="jumbotron">
-        <button id="switch">Switch</button>
+        <div th:id="switchButton">
+            <button id="switch">Switch</button>
+        </div>
         <div th:replace="stressSearch::stressSearch"></div>
         <div th:replace="snpSearch::snpSearch"></div>
     </div>

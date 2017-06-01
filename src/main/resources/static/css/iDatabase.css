@@ -4,6 +4,10 @@
     color: red;
 }
 
+.toolbar{
+    float: left;
+}
+
 .hidden{
     display: none;
 }
@@ -14,6 +18,11 @@
 
 .shown{
     display: block;
+}
+#switch{
+    width: 10%;
+    position: relative;
+    margin: 5% auto 5%;
 }
 
 .pagebutton{
@@ -51,16 +60,21 @@
     float: left;
 }
 
+#heatmapButton{
+    padding: 4px;
+    cursor: pointer;
+}
+
 /*Dropdown styling*/
 /* Style The Dropdown Button */
 .dropbtn {
-    background-color: #919591;
-    color: white;
+    background-color: #fafafa;
+    color: #000000;
     margin-right: 0%;
     margin-left: auto;
-    padding: 16px;
+    padding: 6px;
     font-size: 16px;
-    border: none;
+    border: #000000;
     cursor: pointer;
 }
 
