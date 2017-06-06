@@ -8,7 +8,7 @@
     float: left;
 }
 
-.hidden{
+.notDisplayed{
     display: none;
 }
 
@@ -16,7 +16,7 @@
     display: none;
 }
 
-.shown{
+.isDisplayed{
     display: block;
 }
 #switch{
@@ -27,6 +27,10 @@
 
 .pagebutton{
     display: inline-block;
+}
+
+#welcomeMessages{
+    font-size: 12px;
 }
 
 #snpTableWrapper{
@@ -63,6 +67,14 @@
 #heatmapButton{
     padding: 4px;
     cursor: pointer;
+}
+
+#snpSearch{
+    display: block;
+}
+
+#degSearch{
+    display: none;
 }
 
 /*Dropdown styling*/

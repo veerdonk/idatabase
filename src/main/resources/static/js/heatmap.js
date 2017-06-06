@@ -52,7 +52,11 @@ window.onload = function() {
                 ]
             }
         ],
-        "ajax" : tableUrl,
+        "ajax" : {
+            url: tableUrl,
+            error: function (xhr, error, thrown) {
+                $('#noDataError').show();
+        }},
         "columns" : [
             {"data": "snp"},
             {"data": "cell_type"},
@@ -82,21 +86,17 @@ window.onload = function() {
             if(h<100){
                 h=100;
             }
-
-            if(h>3500){
-                $('#tooMuchDataError').toggle();
-                h=3500;
-            }
             if(w<600){
                 w=600;
             }
 
             var layout = {
+                title: response[0]["qtl"],
                 margin: {
                     l: 100,
                     r: 100,
                     b: 250,
-                    t: 20,
+                    t: 70,
                     pad: 4
                 },
                 height: h+250,
@@ -106,17 +106,40 @@ window.onload = function() {
             var pos = 0;
             var max = response.length;
             Plotly.newPlot('heatmap', [response[pos]], layout);
-            $('.hidden').addClass('pagebutton');
+
+            $('.notDisplayed').addClass('pagebutton');
             window.scrollTo(0,document.body.scrollHeight);
+
+            $('#showAll').click(function () {
+               var allz = [];
+               var ally = [];
+               for(hmd in response) {
+                   for(arr in response[hmd]["z"]){
+                       allz.push(response[hmd]["z"][arr]);
+                       ally.push(response[hmd]["y"][arr]);
+                   }
+               }
+               console.log(response[0]["y"]);
+               console.log(ally);
+               var allData = [{
+                   x: data[0]["x"],
+                   y: ally,
+                   z: allz,
+                   type: 'heatmap'
+               }];
+               layout.height = ally.length * 17.5;
+               Plotly.newPlot('heatmap', allData, layout);
+            });
+
             $('#next15').click(function () {
                 var r = $.Deferred();
                 pos += 1;
                 if(pos >= max-1){
                     pos = max-1;
                 }
-                console.log([response[pos]]);
+                layout.height = response[pos]["y"].length * 17.5 + 250;
                 Plotly.newPlot('heatmap', [response[pos]], layout);
-                r.resolve;
+                r.resolve();
             });
 
             $('#prev15').click(function () {
@@ -124,81 +147,10 @@ window.onload = function() {
                 if(pos <= 0){
                     pos = 0;
                 }
+                layout.height = response[pos]["y"].length * 17.5 + 250;
                 Plotly.newPlot('heatmap', [response[pos]], layout);
             })
         });
     }
-    // $('.selectedQtl').click(function () {
-    //     console.log(this.id + ' clicked');
-    //     var qtl = this.id;
-    //     console.log(qtl);
-    //     if(region!=null){
-    //         ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&qtl='+qtl+'&region='+region;
-    //         console.log(ajaxUrl);
-    //     }
-    //     else{
-    //         ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&qtl='+qtl;
-    //     }
-    //     $.ajax({
-    //         url: ajaxUrl
-    //     }).then(function (response) {
-    //         console.log(response);
-    //         var data = [response[0]];
-    //         var h = data[0]["y"].length*17.5;
-    //         var w = data[0]["x"].length*20;
-    //
-    //         if(h<100){
-    //             h=100;
-    //         }
-    //
-    //         if(h>3500){
-    //             $('#tooMuchDataError').toggle();
-    //             h=3500;
-    //         }
-    //         if(w<600){
-    //             w=600;
-    //         }
-    //
-    //         var layout = {
-    //             margin: {
-    //                 l: 100,
-    //                 r: 100,
-    //                 b: 250,
-    //                 t: 20,
-    //                 pad: 4
-    //             },
-    //             height: h+250,
-    //             width: w
-    //
-    //         };
-    //         var pos = 0;
-    //         var max = response.length;
-    //         Plotly.newPlot('heatmap', [response[pos]], layout);
-    //         $('.hidden').addClass('pagebutton');
-    //         window.scrollTo(0,document.body.scrollHeight);
-    //         $('#next15').click(function () {
-    //             var r = $.Deferred();
-    //             pos += 1;
-    //             if(pos >= max-1){
-    //                 pos = max-1;
-    //             }
-    //             console.log([response[pos]]);
-    //             Plotly.newPlot('heatmap', [response[pos]], layout);
-    //             r.resolve;
-    //         });
-    //
-    //         $('#prev15').click(function () {
-    //             pos -= 1;
-    //             if(pos <= 0){
-    //                 pos = 0;
-    //             }
-    //             Plotly.newPlot('heatmap', [response[pos]], layout);
-    //         })
-    //     });
-    // });
-
-
-
-
 };
 

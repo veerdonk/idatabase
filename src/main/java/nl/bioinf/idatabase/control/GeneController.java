@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class GeneController {
     @Autowired
     GeneService geneService;
 
+    private RestTemplate restTemplate;
     /**
      * Retrieves genes from a datasource using geneservice
      * checks whether there is a result and ties it to the
@@ -38,12 +40,21 @@ public class GeneController {
      */
     @RequestMapping(value="/{locale}/gene")
     public String geneResults(Model model, @RequestParam("geneId") String id){
+        if(id.matches("rs\\d*")){
+            System.out.println(id);
+            String response = restTemplate.getForObject("http://myvariant.info/v1/query?q={id}&fields=dbsnp", String.class, id);
+            System.out.println(response);
+        }
+
         List<Gene> genes = geneService.getGene(id);
 
         if(genes.isEmpty()){
             model.addAttribute("noSuchGene", true);
             return "/home";
         }
+
+
+
         model.addAttribute("geneName", id);
         model.addAttribute("genes", genes);
 

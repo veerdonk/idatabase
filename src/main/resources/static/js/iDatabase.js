@@ -4,6 +4,7 @@
  * and more basic functionality
  */
 window.onload = function(){
+    console.log("iDatabase.js loaded");
     $('#geneId').autocomplete({
         serviceUrl: '/search/forGene',
         lookupLimit: 50,
@@ -24,16 +25,23 @@ window.onload = function(){
         })
     });
 
-    $('#switch').click(function () {
-        $('.hidden').toggle();
-        $('.shown').toggle();
+    $('#snpSearchTab').click(function () {
+        console.log("snpsearch clicked");
+        $('#snpSearch').show();
+        $('#degSearch').hide();
+        $('#tab2').removeClass("active");
+        $('#tab1').addClass("active");
+    });
+
+    $('#degSearchTab').click(function () {
+        $('#snpSearch').hide();
+        $('#degSearch').show();
+        $('#tab1').removeClass("active");
+        $('#tab2').addClass("active");
     });
 
     $('#addRegionButton').click(function () {
         $('.addRegion').toggle();
     });
 
-    $('#multiSnp').click(function(){
-
-    })
 };

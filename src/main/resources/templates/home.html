@@ -4,13 +4,26 @@
 </head>
 <body>
 <div th:replace="title::title">title</div>
+
+
 <div th:class="container">
     <div th:class="jumbotron">
-        <div th:id="switchButton">
-            <button id="switch">Switch</button>
+        <div th:class="row">
+            <div th:class="col-md-4" th:id="welcomeMessages">
+            <p th:text="#{home.welcome}">welcome</p>
+            <p th:text="#{home.DEGsearch}">degSearch</p>
+            <p th:text="#{home.SNPsearch}">snpSearch</p>
+            </div>
+            <div th:class="col-md-8">
+                <ul class="nav nav-tabs">
+                    <li class="active" th:id="tab1"><a href="#" th:id="snpSearchTab">SNP search</a></li>
+                    <li th:id="tab2"><a href="#" th:id="degSearchTab">DEG search</a></li>
+                </ul>
+                <div th:replace="stressSearch::stressSearch"></div>
+                <div th:replace="snpSearch::snpSearch"></div>
+            </div>
         </div>
-        <div th:replace="stressSearch::stressSearch"></div>
-        <div th:replace="snpSearch::snpSearch"></div>
+
     </div>
     <a th:text="#{home.toSummary}" th:href="summary">summarylink</a>
 </div>

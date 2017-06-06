@@ -44,19 +44,6 @@ public class SnpController {
         return "snpPage";
     }
 
-    @RequestMapping(value = "/{locale}/multiSnp")
-    public String multiSnp(Model model, @RequestParam("snps") String snps){
-        model.addAttribute("snpId", snps);
-        return "snpPage";
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/api/getSnpFromDb")
-    public SnpEntry getSnp(@RequestParam("snpId") String snpId){
-        return snpService.getSnps(snpId);
-    }
-
-
     /**
      * Based on a given snp identifier (rsid or genename) this method
      * uses snpService to retrieve all snps from the database that
@@ -164,6 +151,7 @@ public class SnpController {
                 stop += 30;
                 hmd.setX(columns);
                 hmd.setType("heatmap");
+                hmd.setQtl(qtlType);
                 heatmapParts.add(hmd);
             }
 
