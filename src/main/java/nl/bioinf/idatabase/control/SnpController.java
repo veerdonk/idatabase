@@ -151,17 +151,17 @@ public class SnpController {
         }
         ArrayList<HeatmapData> heatmapParts = new ArrayList<>();
 
-        if(rows.size()>15){
+        if(rows.size()>30){
             int j;
-            int stop = 15;
-            for (j = 0; j <= rows.size(); j += 15) {
-                if(j > rows.size()-15){
+            int stop = 30;
+            for (j = 0; j <= rows.size(); j += 30) {
+                if(j > rows.size()-30){
                     stop = rows.size();
                 }
                 HeatmapData hmd = new HeatmapData();
                 hmd.setZ(values.subList(j, stop));
                 hmd.setY(rows.subList(j, stop));
-                stop += 15;
+                stop += 30;
                 hmd.setX(columns);
                 hmd.setType("heatmap");
                 heatmapParts.add(hmd);
