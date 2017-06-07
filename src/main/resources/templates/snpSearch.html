@@ -1,5 +1,5 @@
-<div th:fragment="snpSearch" th:id="snpSearch">
-    <p th:text="#{home.snpSearch.explain}">explained</p>
+<div th:fragment="snpSearch" th:id="snpSearch"><br/>
+    <div th:text="#{home.snpSearch.explain}">explained</div><br/>
     <form th:id="qtlForm" th:action="@{'/' + ${#locale.language} + '/snp'}">
         <div class="form-group">
             <label for="qtlId"> SNP or Gene:

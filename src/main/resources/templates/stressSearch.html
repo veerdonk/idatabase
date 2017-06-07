@@ -14,7 +14,11 @@
     <p th:text="#{home.searchSNP}">Search SNP: </p>
     eg: rs6998012, rs3795974
     <form th:id="snpForm">
-        <input th:id="snpName" th:type="text" th:placeholder="rs6748375"/>
+        <div class="form-group">
+            <label for="snpName"> SNP id:
+            <input th:id="snpName" class="form-control" th:type="text" th:placeholder="rs6748375"/>
+            </label>
+        </div>
+        <button class="btn btn-default" id="submitSNP">Search SNP</button>
     </form>
-    <button class="btn btn-default" id="submitSNP">Search SNP</button>
 </div>

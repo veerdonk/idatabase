@@ -19,7 +19,8 @@
 <div th:id="${region}" th:class="region"></div>
 
 <div th:id="snpTableWrapper">
-    <p th:id="noDataError" class="error" th:text="#{snpPage.noData}">noData</p>
+    <div th:id="noDataError" class="error" th:text="#{snpPage.noData}">noData</div>
+    <div th:id="noHeatmapData" class="error" th:text="#{snpPage.noHeatmapData}"></div>
     <table id="snpTable" class="display" width="100%">
         <thead>
         <tr>
@@ -42,10 +43,11 @@
 
 <p th:id="tooMuchDataError" th:class="error" th:text="#{snpPage.toMuchData}"></p>
 <button th:id="showAll" th:class="notDisplayed">heatmap all SNPs</button>
-<button th:id="prev15" th:class="notDisplayed">previous 30</button> <button th:id="next15" th:class="notDisplayed">next 30</button>
+<button th:id="prev15" th:class="notDisplayed">previous 30</button>
+<button th:id="next15" th:class="notDisplayed">next 30</button>
 
-<div th:id="heatmapContainer">
-    <div th:id="heatmap"></div>
-</div>
+<div th:id="heatmap"></div>
+
+
 </body>
 </html>

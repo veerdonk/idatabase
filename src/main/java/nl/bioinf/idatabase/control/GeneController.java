@@ -27,7 +27,8 @@ public class GeneController {
      * connecting to a datasource
      */
     @Autowired
-    GeneService geneService;
+    private GeneService geneService;
+
 
     private RestTemplate restTemplate;
     /**
@@ -40,14 +41,7 @@ public class GeneController {
      */
     @RequestMapping(value="/{locale}/gene")
     public String geneResults(Model model, @RequestParam("geneId") String id){
-        if(id.matches("rs\\d*")){
-            System.out.println(id);
-            String response = restTemplate.getForObject("http://myvariant.info/v1/query?q={id}&fields=dbsnp", String.class, id);
-            System.out.println(response);
-        }
-
         List<Gene> genes = geneService.getGene(id);
-
         if(genes.isEmpty()){
             model.addAttribute("noSuchGene", true);
             return "/home";

@@ -24,6 +24,7 @@ window.onload = function() {
             {
                 extend: 'collection',
                 text: 'Generate Heatmap',
+                background: false,
                 buttons: [
                     {
                         text: 'Cytokines',
@@ -48,7 +49,14 @@ window.onload = function() {
                         action: function(){
                             drawHeatmap('immuneModulator')
                         }
+                    },
+                    {
+                        text: 'Platelets',
+                        action: function(){
+                            drawHeatmap('platelet')
+                        }
                     }
+
                 ]
             }
         ],
@@ -70,87 +78,96 @@ window.onload = function() {
         console.log(qtl);
         if(region!=null){
             ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&qtl='+qtl+'&region='+region;
-            console.log(ajaxUrl);
         }
         else{
             ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&qtl='+qtl;
         }
+        console.log(ajaxUrl);
         $.ajax({
             url: ajaxUrl
         }).then(function (response) {
-            console.log(response);
-            var data = [response[0]];
-            var h = data[0]["y"].length*17.5;
-            var w = data[0]["x"].length*20;
+            if(response[0]["y"].length >= 1) {
+                $('#noHeatmapData').hide();
+                console.log(response);
+                var data = [response[0]];
+                var h = data[0]["y"].length * 17.5;
+                var w = data[0]["x"].length * 20;
 
-            if(h<100){
-                h=100;
-            }
-            if(w<600){
-                w=600;
-            }
-
-            var layout = {
-                title: response[0]["qtl"],
-                margin: {
-                    l: 100,
-                    r: 100,
-                    b: 250,
-                    t: 70,
-                    pad: 4
-                },
-                height: h+250,
-                width: w
-
-            };
-            var pos = 0;
-            var max = response.length;
-            Plotly.newPlot('heatmap', [response[pos]], layout);
-
-            $('.notDisplayed').addClass('pagebutton');
-            window.scrollTo(0,document.body.scrollHeight);
-
-            $('#showAll').click(function () {
-               var allz = [];
-               var ally = [];
-               for(hmd in response) {
-                   for(arr in response[hmd]["z"]){
-                       allz.push(response[hmd]["z"][arr]);
-                       ally.push(response[hmd]["y"][arr]);
-                   }
-               }
-               console.log(response[0]["y"]);
-               console.log(ally);
-               var allData = [{
-                   x: data[0]["x"],
-                   y: ally,
-                   z: allz,
-                   type: 'heatmap'
-               }];
-               layout.height = ally.length * 17.5;
-               Plotly.newPlot('heatmap', allData, layout);
-            });
-
-            $('#next15').click(function () {
-                var r = $.Deferred();
-                pos += 1;
-                if(pos >= max-1){
-                    pos = max-1;
+                if (h < 200) {
+                    h = 200;
                 }
-                layout.height = response[pos]["y"].length * 17.5 + 250;
-                Plotly.newPlot('heatmap', [response[pos]], layout);
-                r.resolve();
-            });
-
-            $('#prev15').click(function () {
-                pos -= 1;
-                if(pos <= 0){
-                    pos = 0;
+                if (w < 600) {
+                    w = 600;
                 }
-                layout.height = response[pos]["y"].length * 17.5 + 250;
+
+                var layout = {
+                    title: response[0]["qtl"],
+                    margin: {
+                        l: 100,
+                        r: 100,
+                        b: 250,
+                        t: 70,
+                        pad: 4
+                    },
+                    height: h + 250,
+                    width: w
+
+                };
+                var pos = 0;
+                var max = response.length;
                 Plotly.newPlot('heatmap', [response[pos]], layout);
-            })
+                if (max > 1) {
+                    $('.notDisplayed').addClass('pagebutton');
+                }
+
+                window.scrollTo(0, document.body.scrollHeight);
+
+                $('#showAll').click(function () {
+                    var allz = [];
+                    var ally = [];
+                    for (hmd in response) {
+                        for (arr in response[hmd]["z"]) {
+                            allz.push(response[hmd]["z"][arr]);
+                            ally.push(response[hmd]["y"][arr]);
+                        }
+                    }
+                    console.log(response[0]["y"]);
+                    console.log(ally);
+                    var allData = [{
+                        x: data[0]["x"],
+                        y: ally,
+                        z: allz,
+                        type: 'heatmap'
+                    }];
+                    layout.height = ally.length * 17.5;
+                    Plotly.newPlot('heatmap', allData, layout);
+                });
+
+                $('#next15').click(function () {
+                    var r = $.Deferred();
+                    pos += 1;
+                    if (pos >= max - 1) {
+                        pos = max - 1;
+                    }
+                    layout.height = response[pos]["y"].length * 17.5 + 250;
+                    Plotly.newPlot('heatmap', [response[pos]], layout);
+                    r.resolve();
+                });
+
+                $('#prev15').click(function () {
+                    pos -= 1;
+                    if (pos <= 0) {
+                        pos = 0;
+                    }
+                    layout.height = response[pos]["y"].length * 17.5 + 250;
+                    Plotly.newPlot('heatmap', [response[pos]], layout);
+                })
+            }
+            else{
+                $('#noHeatmapData').show();
+            }
         });
+
     }
 };
 

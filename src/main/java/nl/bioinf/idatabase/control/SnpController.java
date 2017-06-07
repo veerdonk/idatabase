@@ -138,7 +138,6 @@ public class SnpController {
         }
         ArrayList<HeatmapData> heatmapParts = new ArrayList<>();
 
-        if(rows.size()>30){
             int j;
             int stop = 30;
             for (j = 0; j <= rows.size(); j += 30) {
@@ -155,7 +154,7 @@ public class SnpController {
                 heatmapParts.add(hmd);
             }
 
-        }
+
         return heatmapParts;
     }
 }

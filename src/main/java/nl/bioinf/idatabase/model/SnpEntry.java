@@ -29,4 +29,5 @@ public class SnpEntry {
     public void setSnps(List<SNP> snps) {
         this.snps = snps;
     }
+
 }
