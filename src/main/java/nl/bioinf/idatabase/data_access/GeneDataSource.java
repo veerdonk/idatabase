@@ -1,7 +1,6 @@
 package nl.bioinf.idatabase.data_access;
 
-import nl.bioinf.idatabase.model.Gene;
-import nl.bioinf.idatabase.model.StressFactor;
+import nl.bioinf.idatabase.model.DEGene;
 
 import java.util.List;
 
@@ -10,9 +9,7 @@ import java.util.List;
  * Interface for gene database
  */
 public interface GeneDataSource {
-    List<Gene> getGeneByensId(String ensId);
-    List<Gene> getGeneByGeneName(String geneName);
+    List<DEGene> getGeneByensId(String ensId);
+    List<DEGene> getGeneByGeneName(String geneName);
     List<String> getNames(String query);
-    List<StressFactor> numberOfGenesPerVector();
-
 }

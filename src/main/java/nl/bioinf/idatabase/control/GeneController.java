@@ -1,5 +1,6 @@
 package nl.bioinf.idatabase.control;
 
+import nl.bioinf.idatabase.model.DEGene;
 import nl.bioinf.idatabase.model.Gene;
 import nl.bioinf.idatabase.service.GeneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +42,12 @@ public class GeneController {
      */
     @RequestMapping(value="/{locale}/gene")
     public String geneResults(Model model, @RequestParam("geneId") String id){
-        List<Gene> genes = geneService.getGene(id);
+        List<DEGene> genes = geneService.getGene(id);
+        System.out.println(genes);
         if(genes.isEmpty()){
             model.addAttribute("noSuchGene", true);
             return "/home";
         }
-
-
 
         model.addAttribute("geneName", id);
         model.addAttribute("genes", genes);

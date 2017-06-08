@@ -1,6 +1,7 @@
 package nl.bioinf.idatabase.service;
 
 import nl.bioinf.idatabase.data_access.GeneDataSource;
+import nl.bioinf.idatabase.model.DEGene;
 import nl.bioinf.idatabase.model.Gene;
 import nl.bioinf.idatabase.model.StressFactor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class GeneService {
      * @param identifier
      * @return a list of Gene objects
      */
-    public List<Gene> getGene(String identifier){
+    public List<DEGene> getGene(String identifier){
         if(identifier.matches("ENSG\\d*")){
             return geneDataSource.getGeneByensId(identifier);
 
@@ -41,14 +42,6 @@ public class GeneService {
     }
     public List<String> getNames(String query){
         return geneDataSource.getNames(query);
-    }
-
-    /**
-     * Method for counting the number of genes per stressfactor
-     * @return a list of StressFactor objects
-     */
-    public List<StressFactor> numberOfGenesPerVector(){
-        return geneDataSource.numberOfGenesPerVector();
     }
 
 }
