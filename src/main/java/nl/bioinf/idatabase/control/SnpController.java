@@ -68,7 +68,12 @@ public class SnpController {
         }
     }
 
-    //TODO write docs/merge with getheatmapsnp
+    /**
+     * Method used by datatables to retrieve data via Ajax.
+     * @param id
+     * @param region
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/api/tableData")
     public dataTablesData dataTables(@RequestParam("qtlId") String id, @RequestParam(value = "region", required = false) Integer region){
@@ -100,7 +105,15 @@ public class SnpController {
         }
     }
 
-    //TODO write docs
+    /**
+     * Method to convert data from the database to a format accepted
+     * by Plotly. Takes a List of SnpEntries and their qtl type then
+     * iterativly builds the lists of rows, columns and values.
+     * These are stored in sets of 30 to provide pagination
+     * @param snps
+     * @param qtlType
+     * @return ArrayList of heatmaps (parts of 1 heatmap)
+     */
     public List<HeatmapData> heatmap(List<SnpEntry> snps, String qtlType){
         HeatmapData hmp = new HeatmapData();
         ArrayList<String> columns = new ArrayList<>();

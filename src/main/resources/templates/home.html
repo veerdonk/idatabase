@@ -4,7 +4,7 @@
 </head>
 <body>
     <div th:replace="title::title">title</div>
-    <div th:class="container">
+    <div th:class="container" th:id="searchContainer">
         <div th:class="jumbotron">
             <div th:class="row">
                 <div th:class="col-md-4" th:id="welcomeMessages">
@@ -22,14 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="row no-gutters">
-            <div class="col-md-9">
-                <a th:text="#{home.toSummary}" th:href="summary">summarylink</a>
-            </div>
-            <div class="col-md-3">
-                <div th:replace="footer::footer">footer</div>
-            </div>
-        </div>
+        <div th:replace="footer::footer">footer</div>
     </div>
 </body>
 </html>

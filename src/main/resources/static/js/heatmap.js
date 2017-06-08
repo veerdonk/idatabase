@@ -18,12 +18,13 @@ window.onload = function() {
         buttons:[
             {
                 extend: 'collection',
-                text: 'Export',
+                text: 'Export <i class="fa-caret-down"></i>',
+                background: false,
                 buttons: [ 'csv', 'excel', 'pdf', 'copy' ]
             },
             {
                 extend: 'collection',
-                text: 'Generate Heatmap',
+                text: 'Generate Heatmap <i class="fa-caret-down"></i>',
                 background: false,
                 buttons: [
                     {
