@@ -1,6 +1,7 @@
 package nl.bioinf.idatabase.data_access;
 
 import nl.bioinf.idatabase.model.DEGene;
+import nl.bioinf.idatabase.model.Gene;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * Interface for gene database
  */
 public interface GeneDataSource {
-    List<DEGene> getGeneByensId(String ensId);
-    List<DEGene> getGeneByGeneName(String geneName);
+    List<Gene> getGeneByensId(String ensId);
+    List<Gene> getGeneByGeneName(String geneName);
     List<String> getNames(String query);
 }

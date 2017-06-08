@@ -14,7 +14,7 @@ window.onload = function() {
     }
 
     $('#snpTable').DataTable({
-        dom: 'lB<"toolbar">frtip',
+        dom: 'lBfrtip',
         buttons:[
             {
                 extend: 'collection',

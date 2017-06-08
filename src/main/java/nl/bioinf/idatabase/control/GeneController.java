@@ -2,6 +2,7 @@ package nl.bioinf.idatabase.control;
 
 import nl.bioinf.idatabase.model.DEGene;
 import nl.bioinf.idatabase.model.Gene;
+import nl.bioinf.idatabase.model.GeneTableData;
 import nl.bioinf.idatabase.service.GeneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,16 +43,22 @@ public class GeneController {
      */
     @RequestMapping(value="/{locale}/gene")
     public String geneResults(Model model, @RequestParam("geneId") String id){
-        List<DEGene> genes = geneService.getGene(id);
-        System.out.println(genes);
+        List<Gene> genes = geneService.getGene(id);
         if(genes.isEmpty()){
             model.addAttribute("noSuchGene", true);
             return "/home";
         }
-
         model.addAttribute("geneName", id);
         model.addAttribute("genes", genes);
 
         return "/geneResults";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/get/genesTable")
+    public GeneTableData getGeneTableData(@RequestParam("id") String id){
+        GeneTableData gtd = new GeneTableData();
+        gtd.setData(geneService.getGene(id));
+        return gtd;
     }
 }

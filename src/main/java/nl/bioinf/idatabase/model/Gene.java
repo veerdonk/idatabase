@@ -14,6 +14,16 @@ public class Gene {
     private double pval;
     private String geneName;
 
+    public Gene(int id, String stressFactor, String timepoint, String ensId, double log2fold, double pval, String geneName) {
+        this.id = id;
+        this.stressFactor = stressFactor;
+        this.timepoint = timepoint;
+        this.ensId = ensId;
+        this.log2fold = log2fold;
+        this.pval = pval;
+        this.geneName = geneName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -31,7 +31,7 @@ public class GeneService {
      * @param identifier
      * @return a list of Gene objects
      */
-    public List<DEGene> getGene(String identifier){
+    public List<Gene> getGene(String identifier){
         if(identifier.matches("ENSG\\d*")){
             return geneDataSource.getGeneByensId(identifier);
 
