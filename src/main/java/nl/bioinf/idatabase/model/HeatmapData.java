@@ -11,6 +11,8 @@ public class HeatmapData {
     private List<Double[]> z;
     private List<String> x;
     private List<String> y;
+    private ArrayList<ArrayList<String>> colorscale;
+
 
     @Override
     public String toString() {
@@ -21,6 +23,14 @@ public class HeatmapData {
                 ", y=" + y +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public ArrayList<ArrayList<String>> getColorscale() {
+        return colorscale;
+    }
+
+    public void setColorscale(ArrayList<ArrayList<String>> colorscale) {
+        this.colorscale = colorscale;
     }
 
     public String getQtl() {

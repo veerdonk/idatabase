@@ -44,9 +44,10 @@
 </div>
 
 <p th:id="tooMuchDataError" th:class="error" th:text="#{snpPage.toMuchData}"></p>
-<button th:id="showAll" th:class="notDisplayed">heatmap all SNPs</button>
-<button th:id="prev15" th:class="notDisplayed">previous 30</button>
-<button th:id="next15" th:class="notDisplayed">next 30</button>
+
+<button th:id="prev15" class="notDisplayed">previous 30</button>
+<button th:id="showAll" class="notDisplayed">heatmap all SNPs</button>
+<button th:id="next15" class="notDisplayed">next 30</button>
 
 <div th:id="heatmap"></div>
 

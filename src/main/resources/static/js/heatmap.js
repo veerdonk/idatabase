@@ -118,7 +118,8 @@ window.onload = function() {
                 var max = response.length;
                 Plotly.newPlot('heatmap', [response[pos]], layout);
                 if (max > 1) {
-                    $('.notDisplayed').addClass('pagebutton');
+                    $('.notDisplayed').addClass('btn');
+                    $('.notDisplayed').addClass('btn-default');
                 }
 
                 window.scrollTo(0, document.body.scrollHeight);
@@ -132,13 +133,12 @@ window.onload = function() {
                             ally.push(response[hmd]["y"][arr]);
                         }
                     }
-                    console.log(response[0]["y"]);
-                    console.log(ally);
                     var allData = [{
                         x: data[0]["x"],
                         y: ally,
                         z: allz,
-                        type: 'heatmap'
+                        type: 'heatmap',
+                        colorscale: data[0]["colorscale"]
                     }];
                     layout.height = ally.length * 17.5;
                     Plotly.newPlot('heatmap', allData, layout);

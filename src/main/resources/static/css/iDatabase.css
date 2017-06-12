@@ -1,4 +1,8 @@
 /* HTML styling */
+hr {
+    border: none;
+    border-bottom: 3px solid black;
+}
 
 .center-block {
     float: none !important

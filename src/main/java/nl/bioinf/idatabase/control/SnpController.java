@@ -141,7 +141,7 @@ public class SnpController {
                     if(!rows.contains(snpEntry.getId())){
                         rows.add(snpEntry.getId());
                     }
-                    curSnpValues[columns.indexOf(snp.getCell_type())] = Math.log10(snp.getPval());
+                    curSnpValues[columns.indexOf(snp.getCell_type())] = -Math.log10(snp.getPval());
                 }
             }
             if(!Arrays.equals(curSnpValues, new Double[arrLen])){
@@ -149,8 +149,14 @@ public class SnpController {
             }
 
         }
-        ArrayList<HeatmapData> heatmapParts = new ArrayList<>();
 
+        ArrayList<ArrayList<String>> colorScale = new ArrayList<>();
+        colorScale.add(new ArrayList<>(Arrays.asList("0.0", "rgb(255,255,0)")));
+        colorScale.add(new ArrayList<>(Arrays.asList("0.5", "rgb(255,140,0)")));
+        colorScale.add(new ArrayList<>(Arrays.asList("0.75", "rgb(255,127,80)")));
+        colorScale.add(new ArrayList<>(Arrays.asList("1.0", "rgb(255,0,0)")));
+
+        ArrayList<HeatmapData> heatmapParts = new ArrayList<>();
             int j;
             int stop = 30;
             for (j = 0; j <= rows.size(); j += 30) {
@@ -164,10 +170,9 @@ public class SnpController {
                 hmd.setX(columns);
                 hmd.setType("heatmap");
                 hmd.setQtl(qtlType);
+                hmd.setColorscale(colorScale);
                 heatmapParts.add(hmd);
             }
-
-
         return heatmapParts;
     }
 }
