@@ -1,9 +1,7 @@
 package nl.bioinf.idatabase.service;
 
 import nl.bioinf.idatabase.data_access.GeneDataSource;
-import nl.bioinf.idatabase.model.DEGene;
-import nl.bioinf.idatabase.model.Gene;
-import nl.bioinf.idatabase.model.StressFactor;
+import nl.bioinf.idatabase.model.DEG;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +29,7 @@ public class GeneService {
      * @param identifier
      * @return a list of Gene objects
      */
-    public List<Gene> getGene(String identifier){
+    public List<DEG> getGene(String identifier){
         if(identifier.matches("ENSG\\d*")){
             return geneDataSource.getGeneByensId(identifier);
 

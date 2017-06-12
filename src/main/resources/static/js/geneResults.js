@@ -22,7 +22,7 @@ window.onload = function () {
             }},
         "columns" : [
             {"data": "stressFactor"},
-            {"data": "timepoint"},
+            {"data": "timePoint"},
             {"data": "ensId"},
             {"data": "log2fold"},
             {"data": "pval"},
