@@ -22,7 +22,7 @@ Data for this project has to be stored in a database. The database used to store
 the SNP data is [MongoDB](https://www.mongodb.com/). A getting started guide for MongoDB
 can be found [here](https://docs.mongodb.com/getting-started/shell/). 
 
-Filling the database can be done in one of two ways. The easiest way is to use [mongoimport](https://docs.mongodb.com/manual/reference/program/mongoimport/)
+Filling the database can be done in one of two ways. The easiest way is to use [mongorestore](https://docs.mongodb.com/manual/reference/program/mongorestore/#bin.mongorestore)
 to import a database dump of another database that was already filled. The other way is to fill the 
 database yourself, while slightly less convenient still doable. To fill the database yourself take
 a look at this [upload tool](https://github.com/veerdonk/mongoUploadIdatabaseData). By specifying 
@@ -30,15 +30,9 @@ a path to your data and which columns the relevant fields are the upload tool wi
 database. Note that this process can be very slow, for large datasets (5+ Gb) runtime can be more than one
  day depending on the power of your machine.
 
-##### MySQL
-The DEG search functionality requires a [MySQL](https://www.mysql.com/) database. A getting started guide
-for MySQL can be found [here](https://dev.mysql.com/doc/mysql-getting-started/en/).
-
-To fill the database use the database schema to create a table (located in downloads). The table can then be 
-filled by [bulk importing](https://dev.mysql.com/doc/refman/5.7/en/load-data.html) the MySQLData.csv (located in downloads)
-
-The application properties file will have to be modified to include your database
-credentials in oder to connect.
+Additionally the DEG data can either be imported from a database dump or imported manually from a .csv using a custom tool
+or something like [mongoimport](https://docs.mongodb.com/manual/reference/program/mongoimport/), object names should be kept 
+the same.
 
 ### Features
 #### DEG search
@@ -74,5 +68,7 @@ can be added.
 
 ##### functionality
 * Filtering options on DEG and SNP tables
-* Switching all DEG data to MongoDB
+* Dynamic heatmaps generated for current table filters
+* Provide linkouts based on gene name, SNP id, etc.
+* More visualizations
 

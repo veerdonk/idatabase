@@ -53,6 +53,12 @@ public class GeneController {
         return "/geneResults";
     }
 
+    /**
+     * endpoint to provide datatables with DEG data
+     * from the database.
+     * @param id
+     * @return GeneTableData object filled with DEG data
+     */
     @ResponseBody
     @RequestMapping(value = "/get/genesTable")
     public GeneTableData getGeneTableData(@RequestParam("id") String id){
