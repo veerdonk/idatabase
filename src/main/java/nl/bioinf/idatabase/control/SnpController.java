@@ -69,10 +69,11 @@ public class SnpController {
     }
 
     /**
-     * Method used by datatables to retrieve data via Ajax.
+     * Method used by datatables to retrieve data via Ajax. connects to the database
+     * to retrieve SNPs and puts them into a datatables compliant object.
      * @param id
      * @param region
-     * @return
+     * @return dataTablesData object filled with datatables compatible data
      */
     @ResponseBody
     @RequestMapping(value = "/api/tableData")
@@ -80,9 +81,8 @@ public class SnpController {
         dataTablesData dataTablesData = new dataTablesData();
         ArrayList<SNP> snps = new ArrayList<>();
 
-        if(id.matches("rs\\d*(.*)")){
-            if(id.matches("(.*),(.*)")){
-                System.out.println(id.split(","));
+        if(id.matches("rs\\d*(.*)")){//is it a snp id?
+            if(id.matches("(.*),(.*)")){//check for multiple
                 for(String snp : id.split(",")){
                     snps.addAll(snpService.getSnps(snp).getSnps());
                 }
@@ -116,6 +116,8 @@ public class SnpController {
      */
     public List<HeatmapData> heatmap(List<SnpEntry> snps, String qtlType){
         HeatmapData hmp = new HeatmapData();
+
+        // builing the list of columns
         ArrayList<String> columns = new ArrayList<>();
         for(SnpEntry snpEntry:snps){
             for(SNP snp : snpEntry.getSnps()){
@@ -129,19 +131,20 @@ public class SnpController {
         }
         Collections.sort(columns);
         hmp.setX(columns);
-        int arrLen = columns.size();
+        int arrLen = columns.size(); // column size is used to set Double array size
 
         ArrayList<String> rows = new ArrayList<>();
         List<Double[]> values = new ArrayList<>();
 
         for(SnpEntry snpEntry : snps){
-            Double[] curSnpValues = new Double[arrLen];
+            Double[] curSnpValues = new Double[arrLen]; // array size is set here
             for(SNP snp : snpEntry.getSnps()){
                 if(Objects.equals(snp.getQtl_type(), qtlType)){
                     if(!rows.contains(snpEntry.getId())){
                         rows.add(snpEntry.getId());
                     }
-                    curSnpValues[columns.indexOf(snp.getCell_type())] = -Math.log10(snp.getPval());
+                    //find place to put pvalue in Double array based on columns
+                    curSnpValues[columns.indexOf(snp.getCell_type())] = -Math.log10(snp.getPval()); //taking -log10 of pvalue
                 }
             }
             if(!Arrays.equals(curSnpValues, new Double[arrLen])){
@@ -150,12 +153,14 @@ public class SnpController {
 
         }
 
+        //Set the colorscale used in heatmapping
         ArrayList<ArrayList<String>> colorScale = new ArrayList<>();
-        colorScale.add(new ArrayList<>(Arrays.asList("0.0", "rgb(255,255,0)")));
-        colorScale.add(new ArrayList<>(Arrays.asList("0.5", "rgb(255,140,0)")));
-        colorScale.add(new ArrayList<>(Arrays.asList("0.75", "rgb(255,127,80)")));
-        colorScale.add(new ArrayList<>(Arrays.asList("1.0", "rgb(255,0,0)")));
+        colorScale.add(new ArrayList<>(Arrays.asList("0.0", "rgb(255,255,0)")));//yellow - low
+        colorScale.add(new ArrayList<>(Arrays.asList("0.5", "rgb(255,140,0)")));// orange
+        colorScale.add(new ArrayList<>(Arrays.asList("0.75", "rgb(255,127,80)")));// orange
+        colorScale.add(new ArrayList<>(Arrays.asList("1.0", "rgb(255,0,0)")));//red - high
 
+        //Create pagination of heatmap
         ArrayList<HeatmapData> heatmapParts = new ArrayList<>();
             int j;
             int stop = 30;
@@ -164,10 +169,10 @@ public class SnpController {
                     stop = rows.size();
                 }
                 HeatmapData hmd = new HeatmapData();
-                hmd.setZ(values.subList(j, stop));
-                hmd.setY(rows.subList(j, stop));
+                hmd.setZ(values.subList(j, stop)); //setting values
+                hmd.setY(rows.subList(j, stop)); // setting y axis
                 stop += 30;
-                hmd.setX(columns);
+                hmd.setX(columns); // setting x axis
                 hmd.setType("heatmap");
                 hmd.setQtl(qtlType);
                 hmd.setColorscale(colorScale);

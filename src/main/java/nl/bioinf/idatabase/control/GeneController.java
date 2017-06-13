@@ -42,14 +42,10 @@ public class GeneController {
      */
     @RequestMapping(value="/{locale}/gene")
     public String geneResults(Model model, @RequestParam("geneId") String id){
-        List<DEG> genes = geneService.getGene(id);
-        if(genes.isEmpty()){
-            model.addAttribute("noSuchGene", true);
-            return "/home";
-        }
         model.addAttribute("geneName", id);
-        model.addAttribute("genes", genes);
-
+        if(geneService.getGene(id).size()==0){
+            model.addAttribute("noData", "true");
+        }
         return "/geneResults";
     }
 
@@ -61,9 +57,10 @@ public class GeneController {
      */
     @ResponseBody
     @RequestMapping(value = "/get/genesTable")
-    public GeneTableData getGeneTableData(@RequestParam("id") String id){
+    public GeneTableData getGeneTableData(Model model, @RequestParam("id") String id){
         GeneTableData gtd = new GeneTableData();
         gtd.setData(geneService.getGene(id));
+
         return gtd;
     }
 }

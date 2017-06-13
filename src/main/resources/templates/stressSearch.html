@@ -1,7 +1,7 @@
 <div th:fragment="stressSearch" th:id="degSearch">
     <br/>
     <div th:text="#{home.searchGenes}">Search gene</div><br/>
-    <div th:class="error" th:if="${noSuchGene}" th:text="#{home.noSuchGene}">errortest</div>
+    <div th:class="error" th:if="${noSuchGene}" th:text="#{home.noSuchGene}">nogene</div>
     <form th:id="geneForm" th:action="@{'/' + ${#locale.language} + '/gene'}">
         <div class="form-group">
             <label for="geneId"> Gene name:
@@ -11,12 +11,13 @@
         <button class="btn btn-default">Search</button>
     </form>
     <br/>
-    <hr/>
+    <hr id="hrs"/>
     <div th:text="#{home.searchSNP}">Search SNP: </div><br/>
+    <div th:id="snpError" th:class="error" th:text="#{DEGSearch.error}"></div>
     <form th:id="snpForm">
         <div class="form-group">
             <label for="snpName"> SNP id:
-            <input th:id="snpName" class="form-control" th:type="text" th:placeholder="rs6748375"/>
+            <input th:id="snpName" class="form-control" th:type="text" th:placeholder="rs6748375" required="true"/>
             </label>
         </div>
         <button class="btn btn-default" id="submitSNP">Search</button>

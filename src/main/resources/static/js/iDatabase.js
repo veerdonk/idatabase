@@ -19,9 +19,15 @@ window.onload = function(){
         $.ajax({
             url: "http://myvariant.info/v1/query?q="+ snp +"\&fields=dbsnp"
         }).then(function (response) {
-            var geneName = response.hits[0].dbsnp.gene.symbol;
-            $('#geneId').val(geneName);
-            $('#geneForm').submit();
+            try {
+                var geneName = response.hits[0].dbsnp.gene.symbol;
+                $('#geneId').val(geneName);
+                $('#geneForm').submit();
+            }
+            catch(e) {
+                $('#snpError').show();
+            }
+
         })
     }
     $('#snpForm').submit(function(e){

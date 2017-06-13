@@ -1,7 +1,10 @@
 /* HTML styling */
-hr {
-    border: none;
-    border-bottom: 3px solid black;
+
+#hrs {
+    height: 5px;
+    border: 0px solid #555555;
+    border-top-width: 1px;
+    width: 85%;
 }
 
 .center-block {
@@ -78,12 +81,8 @@ hr {
     height: auto;
 }
 
-#geneTable {
-    width: 100%;
-    border: solid;
-    background-color: #f9fcf5;
-    padding: 15px;
-    align-self: center;
+#noDataError{
+    color: red;
 }
 
 #searchContainer{

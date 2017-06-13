@@ -13,7 +13,7 @@ window.onload = function() {
         tableUrl = '/api/tableData?qtlId='+snpId;
     }
 
-    $('#snpTable').DataTable({
+    var table = $('#snpTable').DataTable({
         dom: 'lBfrtip',
         buttons:[
             {
@@ -83,7 +83,6 @@ window.onload = function() {
         else{
             ajaxUrl = '/api/getHeatmapSnpFromDb?qtlId='+snpId+'&qtl='+qtl;
         }
-        console.log(ajaxUrl);
         $.ajax({
             url: ajaxUrl
         }).then(function (response) {
@@ -170,5 +169,6 @@ window.onload = function() {
         });
 
     }
+
 };
 

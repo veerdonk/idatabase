@@ -1,9 +1,13 @@
 package nl.bioinf.idatabase.control;
 
+import nl.bioinf.idatabase.model.AutocompleteData;
+import nl.bioinf.idatabase.model.Suggestion;
 import nl.bioinf.idatabase.service.GeneService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,21 +36,18 @@ public class AutocompleteController {
      */
     @ResponseBody
     @RequestMapping("/search/forGene")
-    public String getGeneByNameOrId(String query){
+    public AutocompleteData getGeneByNameOrId(String query){
         List<String> names = geneService.getNames(query);
 
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("{\n\"suggestions\": [\n");
+        AutocompleteData autocompleteData = new AutocompleteData();
+        ArrayList<Suggestion> suggestions = new ArrayList<>();
 
         for(String name:names){
-            sb.append("{\"value\": \"");
-            sb.append(name);
-            sb.append("\"},\n");
+            Suggestion suggestion = new Suggestion(name);
+            suggestions.add(suggestion);
         }
-        sb.setLength(sb.length() - 2);
-        sb.append("\n]\n}");
+        autocompleteData.setSuggestions(suggestions);
 
-        return sb.toString();
+        return autocompleteData;
     }
 }

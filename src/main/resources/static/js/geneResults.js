@@ -4,9 +4,9 @@
 window.onload = function () {
     console.log('geneResults.js started');
     var gene = $('.geneId').first().attr('id');
-    var ajaxUrl = "/get/genesTable?id="+gene;
+    var geneAjaxUrl = "/get/genesTable?id="+gene;
 
-    $('#testTable').DataTable({
+    $('#geneTable').DataTable({
         dom: 'lBfrtip',
         buttons:[
             {
@@ -16,7 +16,7 @@ window.onload = function () {
                 buttons: [ 'csv', 'excel', 'pdf', 'copy' ]
             }],
         "ajax" : {
-            url: ajaxUrl,
+            url: geneAjaxUrl,
             error: function (xhr, error, thrown) {
                 $('#noDataError').show();
             }},

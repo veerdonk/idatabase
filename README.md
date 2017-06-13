@@ -15,13 +15,14 @@ genes can cover over 50.000 SNP's. This tool does all the work for you and displ
 a neat table or heatmap.
 
 ### Getting started
-#### Data requirements
+#### Prerequisites
 
 ##### MongoDB
 Data for this project has to be stored in a database. The database used to store all
 the SNP data is [MongoDB](https://www.mongodb.com/). A getting started guide for MongoDB
 can be found [here](https://docs.mongodb.com/getting-started/shell/). 
 
+##### Data
 Filling the database can be done in one of two ways. The easiest way is to use [mongorestore](https://docs.mongodb.com/manual/reference/program/mongorestore/#bin.mongorestore)
 to import a database dump of another database that was already filled. The other way is to fill the 
 database yourself, while slightly less convenient still doable. To fill the database yourself take
@@ -71,4 +72,20 @@ can be added.
 * Dynamic heatmaps generated for current table filters
 * Provide linkouts based on gene name, SNP id, etc.
 * More visualizations
+
+### Built with
+* [Spring](https://spring.io/) - Java framework
+* [Thymeleaf](http://www.thymeleaf.org/) - Templating engine
+* [MongoDB](https://www.mongodb.com/) - Database engine
+* [Bootstrap](http://getbootstrap.com/) - Styling framework
+* [Plotly](https://plot.ly/javascript/) - Used for heatmaps
+* [DataTables](https://datatables.net/) - Used for tables
+
+### Author
+David van de Veerdonk
+
+### Acknowledgements
+* Michiel Noback - Instructor
+* Yang Li - Data & Project assignment
+
 
